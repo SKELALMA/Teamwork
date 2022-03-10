@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="Board">
+
+	<!-- 쿼리를 xml로 작성하고 id:식별값  
+		  parameterType:우리가 전달할값 
+	     resultType : 받아오는값  -->
+	     
+	<!-- if test="key=='1'"  - 이렇게 쓰면 안된다 인식안된다 -->
+	
+	<select id="Board_getList"  parameterType="BoardDto"  resultType="BoardDto">
+ 		
+ 		select 
+ 			id
+ 			,title
+ 			,(select username from member B where B.userid=A.writer) as username
+ 			,writer
+ 			,contents
+ 			,wdate
+ 			,rnum
+ 		from 
+ 		(
+	 		select
+				A.id
+				,A.title
+				,A.writer
+				,A.contents 
+				,A.wdate
+			    ,@rownum := @rownum+1 AS rnum
+				from board A, (select @rownum:=0) B
+				
+				
+			<if test='key!=null and keyword!=null'>
+	
+				<if test='key=="1"'>
+				where title like concat('%', #{keyword} , '%') or
+				      contents like concat('%', #{keyword} , '%') or 
+				      writer like concat('%', #{keyword} , '%') 
+				</if>
+				
+				<if test='key=="2"'>
+				where title like concat('%', #{keyword} , '%')
+				</if>
+				
+				<if test='key=="3"'>
+				where contents like concat('%', #{keyword} , '%')
+				</if>
+				
+				<if test='key=="4"'>
+				where title like concat('%', #{keyword} , '%') or
+				      contents like concat('%', #{keyword} , '%') 
+				</if>
+				
+			</if> 
+			
+			order by id desc
+		) A
+		limit #{start}, #{pageSize}    
+	</select>
+	<!--  
+		paging  쿼리는  dbms마다 다르다 
+		
+		select ~~  limit 시작위치, 개수
+	
+	 -->
+	 
+	<!--   페이징때문에 전체 레코드 개수를 알아오기 위한 쿼리가 필요한다  -->
+	
+	<select id="Board_getTotal" parameterType="BoardDto" resultType="Integer">
+		select count(*) from board 
+		<if test='key!=null and keyword!=null'>
+
+			<if test='key=="1"'>
+			where title like concat('%', #{keyword} , '%') or
+			      contents like concat('%', #{keyword} , '%') or 
+			      writer like concat('%', #{keyword} , '%') 
+			</if>
+			
+			<if test='key=="2"'>
+			where title like concat('%', #{keyword} , '%')
+			</if>
+			
+			<if test='key=="3"'>
+			where contents like concat('%', #{keyword} , '%')
+			</if>
+			
+			<if test='key=="4"'>
+			where title like concat('%', #{keyword} , '%') or
+			      contents like concat('%', #{keyword} , '%') 
+			</if>
+			
+		</if> 
+		
+	</select>
+
+	
+	<insert id="Board_insert" parameterType="BoardDto">
+		insert into board
+		( title, writer, contents, wdate)
+		values
+		(#{title}, #{writer}, #{contents}, now())
+	</insert>
+	
+	<select id="Board_getView"  parameterType="String"  resultType="BoardDto">
+ 		select
+			A.id
+			,A.title
+			,A.writer
+			,A.contents 
+			,A.wdate
+			,(select username from member B where B.userid=A.writer) as username
+		from board A where id=#{id}
+
+	</select>
+	
+	<delete id="Board_delete" parameterType="String" >
+	delete from board where id=#{id}
+	</delete>
+	
+	
+	<update id="Board_update" parameterType="BoardDto" >
+	update board 
+		set title = #{title}
+			,writer = #{writer}
+			,contents = #{contents}
+	where  id=#{id}
+	</update>
+		
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

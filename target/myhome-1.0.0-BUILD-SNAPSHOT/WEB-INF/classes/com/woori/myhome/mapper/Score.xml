@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="Score">
+
+	<!-- 쿼리를 xml로 작성하고 id:식별값  
+		  parameterType:우리가 전달할값 
+	     resultType : 받아오는값  -->
+	     
+	<!--  맵 만들기  -->
+	
+	<!-- 
+	 Mapped Statements collection does not contain value for Score_getList
+	 
+	-->   
+	<select id="Score_getList"  parameterType="ScoreDto"  resultType="ScoreDto">
+ 		select
+			id
+			,name
+			,kor
+			,eng
+			,mat
+			,sci
+			,total
+			,average
+			,date_format(wdate, '%Y %M %d') wdate
+		from Score
+
+	</select>
+	
+	<insert id="Score_insert" parameterType="ScoreDto">
+			INSERT INTO score
+			(
+				name,
+				kor,
+				eng,
+				mat,
+				sci,
+				total,
+				average,
+				wdate
+			)
+			VALUES
+			(
+				#{name},
+				#{kor},
+				#{eng},
+				#{mat},
+				#{sci},
+				#{total},
+				#{average}
+				,now()
+			);
+
+	</insert>
+	
+	<select id="Score_getView"  parameterType="String"  resultType="ScoreDto">
+ 		select
+			id
+			,name
+			,kor
+			,eng
+			,mat
+			,sci
+			,total
+			,average
+			,date_format(wdate, '%Y %M %d') wdate
+		from Score where id=#{id}
+
+	</select>
+	
+</mapper>

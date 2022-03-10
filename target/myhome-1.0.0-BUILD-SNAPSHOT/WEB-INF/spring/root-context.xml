@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components 
+	id :  객체 식별값 
+	org.apache.commons.dbcp2.BasicDataSource 클래스를 가지고 개체를 만든다. 
+	함수를 호출해서 변수에 값을 넣어야 한다. driverClassName,  url, username, password
+	getter/setter 가 있어요 
+	<property name="username">
+		<value>root</value>
+	</property>
+	
+	setUsername("root")  -> XML로 기술한다 
+	
+	BasicDataSource dataSource = new BasicDataSource();
+	dataSource.setUsername("root");
+	-->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" 
+		destroy-method="close"> 
+		<property name="driverClassName">
+			<value>com.mysql.cj.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://localhost:3306/mydb?allowPublicKeyRetrieval=true&amp;useSSL=false&amp;serverTimezone=UTC</value>			
+		</property>
+		<property name="username">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>1234</value>
+		</property>
+	</bean>
+	
+	<!-- classpath:  src/main/resources  mybatis라는 프레임워크의 설정파일이 들어가야 한다     -->
+	 <!--  mybatis 라이브러리랑 연결하기  -->		
+    <bean id="sqlSessionFactory"     class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="dataSource"   	ref = "dataSource"></property>
+    	<property name="configLocation"   value="classpath:mybatis/mybatis-config.xml"/>
+    </bean>
+    
+    <!--  classpath :상수값 , resource 폴더 -->
+    <bean id="sm"   class="org.mybatis.spring.SqlSessionTemplate">
+    	<constructor-arg index="0"	ref="sqlSessionFactory"></constructor-arg>
+   </bean>
+   
+</beans>
+
+

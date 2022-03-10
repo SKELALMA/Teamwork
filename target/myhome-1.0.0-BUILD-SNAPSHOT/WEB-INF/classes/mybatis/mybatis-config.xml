@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!--  원래 클래스명은 패키지까지 포함하기때문에
+너무 길어서 짧은 별명을 만들어서 접근하기 위해
+기술한다  -->
+	<typeAliases>
+    	<typeAlias alias="BoardDto" type="com.woori.myhome.board.BoardDto"/>
+    	<typeAlias alias="ScoreDto" type="com.woori.myhome.score.ScoreDto"/>	
+    	<typeAlias alias="GalleryDto" type="com.woori.myhome.gallery.GalleryDto"/>	
+    	<typeAlias alias="MemberDto" type="com.woori.myhome.member.MemberDto"/>	
+    	<typeAlias alias="CommentDto" type="com.woori.myhome.comment.CommentDto"/>	
+	</typeAliases>
+
+	<mappers>
+	  	<mapper resource=	"/com/woori/myhome/mapper/Board.xml"/>
+		<mapper resource=	"/com/woori/myhome/mapper/Score.xml"/>
+		<mapper resource=	"/com/woori/myhome/mapper/Gallery.xml"/>
+		<mapper resource=	"/com/woori/myhome/mapper/Member.xml"/>
+		<mapper resource=	"/com/woori/myhome/mapper/Comment.xml"/>
+	</mappers>
+	
+</configuration>
