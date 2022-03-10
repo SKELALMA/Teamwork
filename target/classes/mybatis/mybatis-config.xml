@@ -7,12 +7,21 @@
 너무 길어서 짧은 별명을 만들어서 접근하기 위해
 기술한다  -->
 	<typeAliases>
-
-    	<typeAlias alias="MemberDto" type="com.woori.myhome.member.MemberDto"/>		
+		
+    	<typeAlias alias="MemberDto" type="com.woori.myhome.member.MemberDto"/>
+    	<typeAlias alias="QnABoardDto" type="com.woori.myhome.qnaboard.QnABoardDto"/>
+		<typeAlias alias="NoticeBoardDto" type="com.woori.myhome.noticeboard.NoticeBoardDto"/>
+		<typeAlias alias="DIYBoardDto" type="com.woori.myhome.DIYBoard.DIYBoardDto"/>
+    	
+    			
 	</typeAliases>
 
 	<mappers>
 		<mapper resource=	"/com/woori/myhome/mapper/Member.xml"/>
+		<mapper resource=	"/com/woori/myhome/mapper/QnABoard.xml"/>
+		<mapper resource=	"/com/woori/myhome/mapper/NoticeBoard.xml"/>
+		<mapper resource=	"/com/woori/myhome/mapper/DIYBoard.xml"/>
+		
 	</mappers>
 	
 </configuration>

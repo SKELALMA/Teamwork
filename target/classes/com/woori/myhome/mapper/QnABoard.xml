@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="QnABoard">
+
+	<!-- 쿼리를 xml로 작성하고 id:식별값  
+		  parameterType:우리가 전달할값 
+	     resultType : 받아오는값  -->
+	     
+	<!-- <if test="key=='1'">  - 이렇게 쓰면 안된다 test만 가능 "도 불가능 '로 해야됨    아래 select 고치기전엔 * 이었음 -->
+	     
+	<select id="QnABoard_getList"  parameterType="QnABoardDto"  resultType="QnABoardDto">
+ 		
+ 		select * from
+ 		(
+	          select
+	            A.qna_id
+	            ,A.qna_title
+	            ,A.qna_writer
+	            ,A.qna_comment 
+	            ,date_format(A.qna_wdate, '%Y-%m-%d') as qna_wdate
+	            ,A.qna_moddate
+	            ,A.qna_delyn
+	            ,A.qna_group_id
+	            ,A.qna_depth
+	            ,A.qna_g_level
+	            ,A.qna_hit
+	             ,@rownum := @rownum+1 AS rnum
+	            from qnaboard A, (select @rownum:=0) B
+	            
+	            
+	         <if test='key!=null and keyword!=null'>
+	   
+	            <if test='key=="1"'>
+	            where qna_title like concat('%', #{keyword} , '%') or
+	                  qna_comment like concat('%', #{keyword} , '%') or 
+	                  qna_writer like concat('%', #{keyword} , '%') 
+	            </if>
+	            
+	            <if test='key=="2"'>
+	            where qna_title like concat('%', #{keyword} , '%')
+	            </if>
+	            
+	            <if test='key=="3"'>
+	            where qna_comment like concat('%', #{keyword} , '%')
+	            </if>
+	            
+	            <if test='key=="4"'>
+	            where qna_title like concat('%', #{keyword} , '%') or
+	                  qna_comment like concat('%', #{keyword} , '%') 
+	            </if>
+	            
+	         </if> 
+	         
+	         order by qna_group_id desc, qna_g_level asc
+	      )A limit #{start}, #{pageSize}
+
+ 	</select>
+	
+	<select id="QnABoard_getView"  parameterType="QnABoardDto"  resultType="QnABoardDto">
+ 		
+		select
+			A.qna_id
+			,A.qna_writer
+			,A.qna_title
+			,A.qna_comment
+			,A.qna_hit
+			,A.qna_group_id
+			,A.qna_depth
+			,A.qna_g_level
+			,A.qna_wdate
+		from qnaboard A
+		where qna_id=#{qna_id}
+
+ 	</select>
+	
+	<!--
+		selectKey -> 선행쿼리 keyProperty:출력해주는 변수명, order: "BEFORE"면 뒤에 쿼리보다 먼저 실행 "AFTER"면 뒤에 쿼리보다 나중에 실행
+					 seq에 auto_increment를 안줬기 때문에 ifnull(max(seq),0)+1 as seq insert쿼리를 진헹하기 전에 seq값을 주고 시작하도록
+					 선행쿼리 태그인 <selectKey>를 사용해서 seq의 값이 들어가도록 함, keyProperty는 parameterType에 있는 필드명과 같아야 함
+					 결과를 하나 가져오는 쿼리 가능 출력되는 값을 keyProperty 변수에 전달해서 다음 쿼리에 넘겨줌 꼭 Dto에 있어야됨 
+	 -->
+	 
+	 
+	<!-- 
+	paging 쿼리는 dbms마다 다르다
+	
+	select ~~ limit 시작위치, 개수
+	 -->
+	 
+	<!-- 페이징때문에 전체 레코드 개수를 알아오기 위한 쿼리가 필요하다 -->
+	
+	<select id="QnABoard_getTotal" parameterType="QnABoardDto" resultType="Integer">
+		select count(*) from qnaboard
+		
+<!-- 		<if test='key!=null and keyword!=null'> -->
+		
+<!-- 			<if test='key=="1"'> -->
+<!-- 				where qna_title like concat('%', #{keyword} , '%') or -->
+<!-- 					  qna_comment like concat('%', #{keyword} , '%') or -->
+<!-- 					  qna_writer like concat('%', #{keyword} , '%') -->
+<!-- 			</if> -->
+									
+<!-- 			<if test='key=="2"'> -->
+<!-- 				where qna_title like concat('%', #{keyword} , '%') -->
+<!-- 			</if> -->
+			
+<!-- 			<if test='key=="3"'> -->
+<!-- 				where qna_comment like concat('%', #{keyword} , '%') -->
+<!-- 			</if> -->
+			
+<!-- 			<if test='key=="4"'> -->
+<!-- 				where qna_title like concat('%', #{keyword} , '%') or -->
+<!-- 					  qna_comment like concat('%', #{keyword} , '%') -->
+<!-- 			</if> -->
+			
+<!-- 		</if> -->
+		
+	</select> 
+		 	 
+	
+	<insert id="QnABoard_insert"  parameterType="QnABoardDto">
+		<selectKey resultType="String" keyProperty="qna_id" order="BEFORE">
+			select ifnull(max(qna_id),0)+1 as qna_id
+			from qnaboard
+		</selectKey>
+		insert into qnaboard(
+			qna_id
+			,qna_title
+			,qna_writer
+			,qna_comment
+			,qna_wdate
+			,qna_hit
+			,qna_group_id
+			,qna_depth
+			,qna_g_level
+			,qna_delyn
+		)
+		values(
+			#{qna_id}
+			,#{qna_title}
+			,#{qna_writer}
+			,#{qna_comment}
+			,now()
+			,#{qna_hit}
+			,#{qna_id}
+			,0
+			,1
+			,'Y'
+		)
+	</insert>
+	
+	<!-- ifnull(one, two) one의 값이 null이면 two값을 줌 -->
+	
+	<insert id="QnABoard_reply"  parameterType="QnABoardDto">
+		<selectKey resultType="String" keyProperty="qna_id" order="BEFORE">
+			select ifnull(max(qna_id),0)+1 as qna_id
+			from qnaboard
+		</selectKey>
+		insert into qnaboard(
+			qna_id
+			,qna_title
+			,qna_writer
+			,qna_comment
+			,qna_wdate
+			,qna_hit
+			,qna_group_id
+			,qna_depth
+			,qna_g_level
+		)
+		values(
+			#{qna_id}
+			,#{qna_title}
+			,#{qna_writer}
+			,#{qna_comment}
+			,now()
+			,0
+			,#{qna_group_id}  -- 부모 것을 가져옴
+			,#{qna_depth}+1
+			,#{qna_g_level}+1
+		)
+	</insert>
+	
+	
+	<update id="QnABoard_updateLevel" parameterType="QnABoardDto">
+		update qnaboard set qna_g_level=qna_g_level+1
+		where qna_group_id=#{qna_group_id} and qna_g_level>#{qna_g_level}
+	</update>
+	
+	<delete id="QnABoard_delete" parameterType="QnABoardDto">
+		delete
+		from qnaboard
+		where qna_id=#{qna_id}
+	</delete>
+	
+	<update id="QnABoard_update" parameterType="QnABoardDto">
+		update qnaboard
+			set qna_title = #{qna_title}
+				,qna_comment = #{qna_comment}
+				,qna_moddate = now()
+		where qna_id = #{qna_id}
+	</update>
+	
+	<update id="QnABoard_hit" parameterType="QnABoardDto">
+		update qnaboard
+			set qna_hit = #{qna_hit}+1
+		where qna_id = #{qna_id}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

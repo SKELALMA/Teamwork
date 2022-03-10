@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="Comment">
+
+	
+	<insert id="Comment_insert" parameterType="CommentDto">
+		insert into comment
+		( comment_board_id, comment_board_loc, comment_userid, comment, comment_wdate)
+		values
+		(#{comment_board_id}, 0,  #{comment_userid}, #{comment}, now())
+	</insert>
+	
+	<select id="Comment_getList" parameterType="CommentDto"  resultType="CommentDto">
+	
+	select 
+		A.comment_userid, comment, A.comment_wdate, A.comment_id, A.comment_board_id
+	from comment A
+<!-- 	left outer join member B on A.userid=B.userid  -->
+	where comment_board_id=#{comment_board_id}
+	
+	</select>
+	
+	<select id="Comment_getView" parameterType="CommentDto"  resultType="CommentDto">
+	select 
+		A.comment_userid, comment, A.comment_wdate, A.comment_id, A.comment_board_id
+	from comment A
+<!-- 	left outer join member B on A.userid=B.userid  -->
+	where A.comment_id=#{comment_id}
+	</select>
+	
+	<update id="Comment_update" parameterType="CommentDto">
+		update comment set comment = #{comment} where comment_id = #{comment_id}
+	</update>
+	
+	<delete id="Comment_delete" parameterType="CommentDto">
+		delete from comment where comment_id=#{comment_id}
+	</delete>
+	
+		
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
