@@ -47,7 +47,7 @@
                 <th >작성일</th>
                 <td><%=dto.getNotice_wdate()%></td>
                 <th>조회수</th>
-                <td><%=dto.getNotice_hit()%></td>
+                <td><%=dto.getNotice_hit()+1%></td>
 
               </tr>
               <tr>

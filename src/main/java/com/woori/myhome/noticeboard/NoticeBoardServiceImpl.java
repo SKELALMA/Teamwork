@@ -1,5 +1,5 @@
 package com.woori.myhome.noticeboard;
-
+ 
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -82,5 +82,9 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 		
 		commentDao.comment_delete(dto);
 	}
-
+	 
+	@Override
+	  public void hit(NoticeBoardDto dto) {
+	     dao.hit(dto);
+	 }
 }

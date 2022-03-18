@@ -29,10 +29,14 @@
 <form name="myform" method="get">
 	<input type="hidden" name="key" id="key" value="<%=key%>"/>
 	<input type="hidden" name="pg" id="pg" value="<%=pg%>"/>
-	<input type="hidden" name="id" id="id" value=""/>
+	<input type="hidden" name="notice_id" id="notice_id" value=""/>
 
-    <div class="container" style="margin-top:80px">
-        <h2>공지사항 게시판 (${totalCnt}건)</h2>   <!-- 배열은 $ (== < %=request.getAttribute("totalCnt")%>) 표현식 못씀 -->
+
+    <div class="container" >
+    	<div class="thumbnail">
+	      <a href='#'></a><img src="<%=request.getContextPath()%>/resources/images/notice.jpg/" alt="Lights" style="width:100%; height:500px; object-fit: cover;"></a>                          
+	    </div>
+        <h2 style="margin-top:50px">공지사항 게시판 (${totalCnt}건)</h2>   <!-- 배열은 $ (== < %=request.getAttribute("totalCnt")%>) 표현식 못씀 -->
 
         <div class="input-group mb-3" style="margin-top:20px;">
             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" id="searchItem">
@@ -157,7 +161,7 @@ function goPage(pg){
 function goView(id){
 	
 	frm = document.myform;
-	frm.id.value=id;
+	frm.notice_id.value=id;
 	frm.method="get";
 	frm.action="${pageContext.request.contextPath}/noticeboard/view";
 	frm.submit();

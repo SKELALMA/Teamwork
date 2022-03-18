@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="AdminMember">
+
+	<!-- 쿼리를 xml로 작성하고 id:식별값  
+		  parameterType:우리가 전달할값 
+	     resultType : 받아오는값  -->
+	     
+	<!-- if test="key=='1'"  - 이렇게 쓰면 안된다 인식안된다 -->
+	
+	<select id="admin_getList"  parameterType="AdminMemberDto"  resultType="AdminMemberDto">
+ 		
+ 	select 	 
+		    user_seq
+			,A.user_id
+			,A.user_name
+			,A.user_mail
+			,A.user_wdate
+			,A.user_active
+			,A.user_level
+			,A.user_phone
+		from user A
+	
+	</select>
+	
+	<select id="admin_getView"  parameterType="AdminMemberDto"  resultType="AdminMemberDto">
+ 		
+ 	select 	 
+		    user_seq
+			,A.user_id
+			,A.user_name
+			,A.user_mail
+			,A.user_wdate
+			,A.user_active
+			,A.user_level
+			,A.user_phone
+		from user A
+		where A.user_seq = #{user_seq}
+	
+	</select>
+	
+	<update id="updateactive" parameterType="AdminMemberDto">
+		<if test='user_active=="Y"'>
+				update user set user_active ='N' where user_active='Y' and user_seq=#{user_seq}
+			</if>
+			
+			<if test='user_active=="N"'>
+				update user set user_active ='Y' where user_active='N' and user_seq=#{user_seq}
+		</if>						
+		
+	</update>
+	
+</mapper>

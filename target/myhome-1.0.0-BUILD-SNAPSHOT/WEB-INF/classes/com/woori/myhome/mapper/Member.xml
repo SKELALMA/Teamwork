@@ -13,92 +13,88 @@
 	
 	
 	<select id="Member_isduplicate" parameterType="MemberDto" resultType="Integer">
-		select count(*) from member
-		where userid=#{userid}
+		select count(*) from USER
+		where USER_ID=#{user_id}
 	</select>
 	
 	<insert id="Member_insert" parameterType="MemberDto" >
-	INSERT INTO member
+	INSERT INTO USER
 	(
-		userid,
-		password,
-		username,
-		email,
-		wdate,
-		nickname,
-		phone,
-		zipcode,
-		address1,
-		address2
+		USER_PASSWORD,
+		USER_NAME,
+		USER_MAIL,
+		USER_WDATE,
+		USER_ID,
+		USER_PHONE,
+		USER_ADDRESS1,
+		USER_ADDRESS2,
+		USER_ACTIVE
 	)
 	VALUES
 	(
-		#{userid},
-		#{password},
-		#{username},
-		#{email},
+		#{user_password},
+		#{user_name},
+		#{user_mail},
 		now(),
-		#{nickname},
-		#{phone},
-		#{zipcode},
-		#{address1},
-		#{address2}
+		#{user_id},
+		#{user_phone},
+		#{user_address1},
+		#{user_address2},
+		#{user_active}
 	)
 	</insert>
 	
 	<select id="Member_getInfo" parameterType="MemberDto" resultType="MemberDto">
 		select 	 
-		    id
-			,A.userid
-			,A.password
-			,A.email
-			,A.phone
-			,A.username 
-			,A.address1
-			,A.address2
-			,A.zipcode
-			,A.nickname
-		from member A
-		where userid=#{userid} 
+		    USER_SEQ
+			,A.USER_ID
+			,A.USER_PASSWORD
+			,A.USER_MAIL
+			,A.USER_PHONE
+			,A.USER_NAME
+			,A.USER_ADDRESS1
+			,A.USER_ADDRESS2
+			,A.USER_LEVEL
+			,A.USER_ACTIVE
+		from USER A
+		where USER_ID=#{user_id} 
 	</select>
 	
 	<select id="Member_findid" parameterType="MemberDto" resultType="MemberDto">
 		select 	
-		    id
-			,userid
-			,password
-			,email
-			,phone
-			,username 
-		from member
-		where email=#{email} and phone=#{phone} 
+		    USER_SEQ
+			,USER_ID
+			,USER_PASSWORD
+			,USER_MAIL
+			,USER_PHONE
+			,USER_NAME 
+		from USER
+		where USER_MAIL=#{user_mail} and USER_PHONE=#{user_phone} 
 	</select>
 	
 	<select id="Member_findpassword" parameterType="MemberDto" resultType="MemberDto">
 		select 	
-		    id
-			,A.userid
-			,A.password
-			,A.email
-			,A.phone
-			,A.username 
-			,A.address1
-			,A.address2
-			,A.zipcode
-			,A.nickname
-		from member A
-		where email=#{email} and userid=#{userid} 
+		    USER_SEQ
+			,A.USER_ID
+			,A.USER_PASSWORD
+			,A.USER_MAIL
+			,A.USER_PHONE
+			,A.USER_NAME 
+			,A.USER_ADDRESS1
+			,A.USER_ADDRESS2
+			
+		from USER A
+		where USER_MAIL=#{user_mail} and USER_ID=#{user_id} 
 	</select>
 			
 	<update id="Member_updateInfo" parameterType="MemberDto" >
-		update member set password = #{password}
-						,email=#{email}
-						,phone=#{phone}
-						,address1=#{address1}
-						,address2 = #{address2}
-						,zipcode = #{zipcode}
-						,nickname=#{nickname}
-		where userid=#{userid}
+		update USER set USER_PASSWORD = #{user_password}
+						,USER_MAIL=#{user_mail}
+						,USER_PHONE=#{user_phone}
+						,USER_ADDRESS1=#{user_address1}
+						,USER_ADDRESS2 = #{user_address2}
+						,USER_ACTIVE = #{user_active}
+		where USER_ID=#{user_id}
 	</update>
 
 	

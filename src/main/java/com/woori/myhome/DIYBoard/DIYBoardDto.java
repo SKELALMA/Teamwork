@@ -1,7 +1,7 @@
 package com.woori.myhome.DIYBoard;
 
 import com.woori.myhome.common.BaseDto;
-
+ 
 public class DIYBoardDto extends BaseDto{
 	private String id="";
 	private String title="";
@@ -11,8 +11,15 @@ public class DIYBoardDto extends BaseDto{
 	private String delyn="";
 	private String image="";
 	private int hit=0;
+	private String category="";
 	
 	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	public int getHit() {
 		return hit;
 	}

@@ -11,7 +11,16 @@ public class MemberDto {
 	private String user_address1="";
 	private String user_address2="";
 	private String user_level="";
+	private String user_active="";
 	
+	
+	
+	public String getUser_active() {
+		return user_active;
+	}
+	public void setUser_active(String user_active) {
+		this.user_active = user_active;
+	}
 	public String getUser_level() {
 		return user_level;
 	}

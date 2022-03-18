@@ -1,5 +1,5 @@
 package com.woori.myhome.DIYBoard;
-
+ 
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -59,7 +59,7 @@ public class DIYBoardServiceImpl implements DIYBoardService{
 
 	
 	
-	//************** 댓글
+	//************** ���
 	@Override
 	public void comment_insert(CommentDto dto) {
 		// TODO Auto-generated method stub
@@ -86,6 +86,12 @@ public class DIYBoardServiceImpl implements DIYBoardService{
 	@Override
 	public void comment_delete(CommentDto dto) {
 		commentDao.comment_delete(dto);
+	}
+
+	@Override
+	public List<DIYBoardDto> getListHit(DIYBoardDto dto) {
+		// TODO Auto-generated method stub
+		return dao.getListHit(dto);
 	}
 
 }

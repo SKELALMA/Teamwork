@@ -1,5 +1,5 @@
 package com.woori.myhome.common;
-
+ 
 //객체를 안만들고 쓰는 클래스 - 여기저기서 다목적으로 사용하는 클래스는 이렇게 설계한다 
 public class StringUtil {
 	public static String nullToValue(Object ob, String value) {

@@ -32,9 +32,7 @@
 		<level value="info" />
 	</logger>
 
-
-
-	 <!-- java.sql을 위한 설정   ********** 추가 -->
+	<!-- java.sql을 위한 설정   ********** 추가 -->
     <logger name="java.sql.Connection">
     	<level value="debug"/>
     </logger>

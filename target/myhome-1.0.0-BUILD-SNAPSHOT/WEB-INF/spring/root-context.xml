@@ -53,10 +53,11 @@
     </bean>
     
     <!--  classpath :상수값 , resource 폴더 -->
-    <bean id="sm"   class="org.mybatis.spring.SqlSessionTemplate">
+     <bean id="sm"   class="org.mybatis.spring.SqlSessionTemplate">
     	<constructor-arg index="0"	ref="sqlSessionFactory"></constructor-arg>
    </bean>
    
+   <mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
 </beans>
 
 

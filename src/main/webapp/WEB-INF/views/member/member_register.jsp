@@ -59,7 +59,7 @@ MemberDto dto = (MemberDto)request.getAttribute("memberDto");
     	 <input type="hidden" name="idcheck" id="idcheck" value="N"/>
     	 <input type="text" class="form-control" placeholder="아이디" name="user_id" id="user_id">
     	<div class="input-group-append">
-   	   <button class="btn btn-warning" type="button" id="btnDuplicate">중복체크</button>  
+   	   <button class="btn btn-success" type="button" id="btnDuplicate">중복체크</button>  
      	</div>
 	 </div>
 		 <%} else{%>
@@ -100,7 +100,7 @@ MemberDto dto = (MemberDto)request.getAttribute("memberDto");
   
 
   <div class="mb-3">
-    <label for="address1">도로주소</label>&nbsp;&nbsp;<button type="button" class="btn btn-warning btn-sm" onclick="findAddr()">&nbsp;검색&nbsp;</button>
+    <label for="address1">도로주소</label>&nbsp;&nbsp;<button type="button" class="btn btn-success btn-sm" onclick="findAddr()">&nbsp;검색&nbsp;</button>
     <input type="text" class="form-control" placeholder="서울특별시 강남구 언주로 508" name="user_address1" id="user_address1"
     value="<%=dto.getUser_address1()%>" >
   </div>
@@ -119,7 +119,7 @@ MemberDto dto = (MemberDto)request.getAttribute("memberDto");
     
    	  <div class="btn-group">
        
-     	  <button type="button" class="btn btn-warning" onclick="goWrite()">&nbsp;&nbsp;등 록&nbsp;&nbsp;</button>&nbsp;&nbsp;
+     	  <button type="button" class="btn btn-success" onclick="goWrite()">&nbsp;&nbsp;등 록&nbsp;&nbsp;</button>&nbsp;&nbsp;
       
      	  <button type="button" class="btn btn-danger" onclick="goCancel()">&nbsp;&nbsp;취 소&nbsp;&nbsp;</button>&nbsp;&nbsp;
   	   </div>

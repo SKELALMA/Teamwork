@@ -1,5 +1,5 @@
 package com.woori.myhome.noticeboard;
-
+ 
 import com.woori.myhome.common.BaseDto;
 
 public class NoticeBoardDto extends BaseDto{

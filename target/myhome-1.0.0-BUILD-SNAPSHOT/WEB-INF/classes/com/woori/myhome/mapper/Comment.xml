@@ -5,38 +5,38 @@
  
 <mapper namespace="Comment">
 
-	
+	 
 	<insert id="Comment_insert" parameterType="CommentDto">
-		insert into tb_comment
-		(board_id, userid, comment, wdate)
+		insert into comment
+		( comment_board_id, comment_board_loc, comment_userid, comment, comment_wdate)
 		values
-		(#{board_id}, #{userid}, #{comment}, now())
+		(#{comment_board_id}, 0,  #{comment_userid}, #{comment}, now())
 	</insert>
 	
 	<select id="Comment_getList" parameterType="CommentDto"  resultType="CommentDto">
 	
 	select 
-			A.userid, comment, A.wdate, A.id, username, board_id
-	from tb_comment A
-	left outer join member B on A.userid=B.userid 
-	where board_id=#{board_id}
+		A.comment_userid, comment, A.comment_wdate, A.comment_id, A.comment_board_id
+	from comment A
+<!-- 	left outer join member B on A.userid=B.userid  -->
+	where comment_board_id=#{comment_board_id}
 	
 	</select>
 	
 	<select id="Comment_getView" parameterType="CommentDto"  resultType="CommentDto">
 	select 
-			A.userid, comment, A.wdate, A.id, username, board_id
-	from tb_comment A
-	left outer join member B on A.userid=B.userid 
-	where A.id=#{id}
+		A.comment_userid, comment, A.comment_wdate, A.comment_id, A.comment_board_id
+	from comment A
+<!-- 	left outer join member B on A.userid=B.userid  -->
+	where A.comment_id=#{comment_id}
 	</select>
 	
 	<update id="Comment_update" parameterType="CommentDto">
-		update tb_comment set comment = #{comment} where id=#{comment_id}
+		update comment set comment = #{comment} where comment_id = #{comment_id}
 	</update>
 	
 	<delete id="Comment_delete" parameterType="CommentDto">
-		delete from tb_comment where id=#{comment_id}
+		delete from comment where comment_id=#{comment_id}
 	</delete>
 	
 		

@@ -33,7 +33,7 @@
     
      <div class="btn-group">
        
-       <button type="button" class="btn btn-warning" onclick="goFindId()">아이디찾기</button>&nbsp;&nbsp;
+       <button type="button" class="btn btn-success" onclick="goFindId()">아이디찾기</button>&nbsp;&nbsp;
        <button type="button" class="btn btn-danger" onclick="goCancel()">취소</button>&nbsp;&nbsp;
      </div>
      
@@ -83,7 +83,7 @@ function goFindId()
 function goCancel()
 {
   var frm = document.form;
-   frm.action="/board/list";
+   frm.action="member/member_login";
    frm.submit();
 }
 </script>

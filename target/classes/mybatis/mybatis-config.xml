@@ -7,12 +7,42 @@
 너무 길어서 짧은 별명을 만들어서 접근하기 위해
 기술한다  -->
 	<typeAliases>
-
-    	<typeAlias alias="MemberDto" type="com.woori.myhome.member.MemberDto"/>		
+		
+    	<typeAlias alias="MemberDto" type="com.woori.myhome.member.MemberDto"/>
+    	<typeAlias alias="CommentDto" type="com.woori.myhome.comment.CommentDto"/>
+    	<typeAlias alias="QnABoardDto" type="com.woori.myhome.qnaboard.QnABoardDto"/>
+		<typeAlias alias="NoticeBoardDto" type="com.woori.myhome.noticeboard.NoticeBoardDto"/>
+		<typeAlias alias="DIYBoardDto" type="com.woori.myhome.DIYBoard.DIYBoardDto"/>
+		<typeAlias alias="ReceipeBoardDto" type="com.woori.myhome.ReceipeBoard.ReceipeBoardDto"/>
+    	
+    	<!-- 관리자 페이지 -->
+		<typeAlias alias="AdminReceipeBoardDto" type="com.woori.myhome.admin.ReceipeBoard.AdminReceipeBoardDto"/>
+    	<typeAlias alias="AdminNoticeBoardDto" type="com.woori.myhome.admin.noticeboard.AdminNoticeBoardDto"/>
+		<typeAlias alias="AdminQnABoardDto" type="com.woori.myhome.admin.qnaboard.AdminQnABoardDto"/>
+		<typeAlias alias="AdminDIYBoardDto" type="com.woori.myhome.admin.DIYBoard.AdminDIYBoardDto"/>
+		<typeAlias alias="AdminMemberDto" type="com.woori.myhome.admin.member.AdminMemberDto"/>
+		<typeAlias alias="AdminLoginDto" type="com.woori.myhome.admin.login.AdminLoginDto"/>
+		<!-- 관리자 페이지 -->
+    			
 	</typeAliases>
 
 	<mappers>
 		<mapper resource=	"/com/woori/myhome/mapper/Member.xml"/>
+		<mapper resource=	"/com/woori/myhome/mapper/Comment.xml"/>
+		<mapper resource=	"/com/woori/myhome/mapper/QnABoard.xml"/>
+		<mapper resource=	"/com/woori/myhome/mapper/NoticeBoard.xml"/>
+		<mapper resource=	"/com/woori/myhome/mapper/DIYBoard.xml"/>
+		<mapper resource=	"/com/woori/myhome/mapper/ReceipeBoard.xml"/>
+		
+		<!-- 관리자 페이지 -->
+		<mapper resource=	"/com/woori/myhome/mapper/AdminReceipeBoard.xml"/>
+		<mapper resource=	"/com/woori/myhome/mapper/AdminNoticeBoard.xml"/>
+		<mapper resource=	"/com/woori/myhome/mapper/AdminQnABoard.xml"/>
+		<mapper resource=	"/com/woori/myhome/mapper/AdminDIYBoard.xml"/>
+		<mapper resource=	"/com/woori/myhome/mapper/AdminMember.xml"/>
+		<mapper resource=	"/com/woori/myhome/mapper/AdminLogin.xml"/>
+		<!-- 관리자 페이지 -->
+		
 	</mappers>
 	
 </configuration>

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+ 
 @Controller
 public class NoticeBoardController {
 
@@ -32,6 +32,7 @@ public class NoticeBoardController {
 	@RequestMapping(value="/noticeboard/view", method=RequestMethod.GET)
 	String noticeboard_view(NoticeBoardDto dto, Model model)
 	{
+		service.hit(dto);
 		NoticeBoardDto resultdto = service.getView(dto);
 		model.addAttribute("noticeBoardDto", resultdto);
 		return "noticeboard/noticeboard_view";

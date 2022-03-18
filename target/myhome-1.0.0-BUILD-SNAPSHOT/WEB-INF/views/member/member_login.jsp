@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<%@include file="../include/nav.jsp" %>
+<%@include file="../include/nav.jsp" %> 
 <form name="myform" id="myform">
    <input type="hidden" name="idcheck" id="idcheck" value="N"/>
    
@@ -21,11 +21,11 @@
   <h1>로그인</h1>
 
   <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="아이디" name="userid" id="userid">
+    <input type="text" class="form-control" placeholder="아이디" name="user_id" id="user_id">
   </div>
 
   <div class="input-group mb-3">
-    <input type="password" class="form-control" name="password" id="password" placeholder="페스워드">
+    <input type="password" class="form-control" name="user_password" id="user_password" placeholder="페스워드">
   </div>
 
   
@@ -33,10 +33,10 @@
     
      <div class="btn-group">
        
-       <button type="button" class="btn btn-primary" onclick="goWrite()">로그인</button>&nbsp;&nbsp;
-       <button type="button" class="btn btn-primary" onclick="goFindid()">아이디찾기</button>&nbsp;&nbsp;
-       <button type="button" class="btn btn-primary" onclick="goFindpassword()">패스워드찾기</button>&nbsp;&nbsp;
-       <button type="button" class="btn btn-primary" onclick="goCancel()">취소</button>&nbsp;&nbsp;
+       <button type="button" class="btn btn-success" onclick="goWrite()">로그인</button>&nbsp;&nbsp;
+       <button type="button" class="btn btn-success" onclick="goFindid()">아이디찾기</button>&nbsp;&nbsp;
+       <button type="button" class="btn btn-success" onclick="goFindpassword()">패스워드찾기</button>&nbsp;&nbsp;
+       <button type="button" class="btn btn-danger" onclick="goCancel()">취소</button>&nbsp;&nbsp;
      </div>
    </div>
 
@@ -62,6 +62,8 @@ function goWrite()
       type:"POST",
    })
    .done( (result)=>{
+	   console.log(result);
+	   
       	if(result.flag=="1")
 		{
       		alert("로그온 성공");
@@ -70,6 +72,10 @@ function goWrite()
       	else if(result.flag=="2")
       	{
       		alert("아이디를 찾을 수 없습니다.");
+      	}
+      	else if(result.flag=="4")
+      	{
+      		alert("활동가 중지가 되었습니다.");
       	}
       	else  //패스워드 실패시 3을 보낸다  
       	{

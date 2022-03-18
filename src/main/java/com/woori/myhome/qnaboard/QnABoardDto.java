@@ -1,5 +1,5 @@
 package com.woori.myhome.qnaboard;
-
+ 
 import com.woori.myhome.common.BaseDto;
 
 public class QnABoardDto extends BaseDto{

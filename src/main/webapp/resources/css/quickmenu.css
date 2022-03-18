@@ -1,0 +1,33 @@
+
+.qnb {
+    position: absolute;
+    z-index: 1;
+    right: 20px;
+    top: 50px;
+    width: 80px;
+    font: normal 12px/16px "Noto Sans";
+    color: #333;
+    letter-spacing: -0.3px;
+    transition: top 0.2s;
+}
+
+.qnb .thumb {
+    width: 80px;
+    height: 120px;
+    padding-bottom: 7px;
+}
+
+.qnb .side_menu {
+    width: 80px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-top: none;
+}
+
+.side_menu .link_menu {
+    display: block;
+    height: 29px;
+    line-height: 29px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}

@@ -23,6 +23,8 @@
 	String pg = StringUtil.nullToValue(request.getParameter("pg"), "0");
 	int totalCnt = (Integer)request.getAttribute("totalCnt");
 	List<DIYBoardDto> list = (List<DIYBoardDto>)request.getAttribute("galleryList");
+
+	
 %> 
 
 <%@include file="../include/nav.jsp" %>
@@ -32,9 +34,16 @@
 	<input type="hidden" name="pg"  id="pg" value="<%=pg%>"/>
 	<input type="hidden" name="id"  id="id" value=""/>
 
-    <div class="container" style="margin-top:80px">
-        <h2>게시판 목록 (${totalCnt}건)</h2>
+	
 
+ 
+    <div class="container" >
+        <div class="thumbnail">
+      	<a href='#'></a><img src="<%=request.getContextPath()%>/resources/images/diy2.jpg/" alt="Lights" style="width:100%; height:500px; object-fit: cover;"></a>                          
+    	</div>
+        <h2 style="margin-top:50px">자랑하기  </h2>
+        <p>총 <strong style="color: green">${totalCnt}</strong>개의 게시글이 있습니다.</p>
+<%-- 
         <div class="input-group mb-3" style="margin-top:20px;">
             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
             	id="searchItem">
@@ -49,15 +58,26 @@
             <input type="text" class="form-control" placeholder="Search"
             	name="keyword" id="keyword" value="<%=keyword%>">
             <button class="btn btn-secondary" type="button" onclick="goSearch()">Go</button>
-          </div>
-
+          </div> 
+--%>
+		
+			<div class="btn-group" role="group" aria-label="Basic outlined example" style="margin-bottom: 30px; float: right">
+			
+			  <button type="button" class="btn btn-outline-primary " onClick="goList()" >최신순</button>
+			  <button type="button" class="btn btn-outline-primary" onClick="goHitList()" >조회수순</button>
+			</div>
+			<br/>
+			<br/>
+			<br/>
+			
         	<div class="row">
              <!-- 한행시작 -->
             <% for( DIYBoardDto dto : list){ %>
             <div class="col-sm-3">
               <div class="thumbnail">
-                <a href="../upload/<%=dto.getImage()%>" target="_blank">
-                  <img src="../upload/<%=dto.getImage()%>" alt="Lights" style="width:100%">
+                <%-- <a href="<%=request.getContextPath() %>/upload/<%=dto.getImage()%>" target="_blank"> --%>
+                 <img class="btn" src="<%=request.getContextPath() %>/upload/<%=dto.getImage()%>" onclick="goView('<%=dto.getId()%>')" 
+                  alt="Lights" style="width:100%; height:150px; object-fit: cover;">
                   <div class="caption">
                     <a href="#none" onclick="goView('<%=dto.getId()%>')"><p><%=dto.getTitle()%></p></a>
                   </div>
@@ -88,11 +108,11 @@
 
 <script>
 
-window.onload=function(){
+<%-- window.onload=function(){
 	let key = '<%=key%>';
 	var texts=["", "선택하세요", "제목", "내용", "제목+내용"];
 	document.getElementById("searchItem").innerHTML=texts[key];
-}
+} --%>
 
 
 function changeSearch(id)
@@ -129,7 +149,15 @@ function goView(id)
 	frm.submit();
 }
 
+function goList()
+{
+	location.href="<%=request.getContextPath()%>/gallery/list"
+}
 
+function goHitList()
+{
+	location.href="<%=request.getContextPath()%>/gallery/list/hit"
+}
 </script>
 
 

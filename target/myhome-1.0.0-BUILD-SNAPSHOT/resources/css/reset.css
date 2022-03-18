@@ -1,0 +1,118 @@
+   
+@charset "utf-8";
+
+@font-face {
+    font-family: nanum gothic;
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://res.kurly.com/fonts/NanumGothic-Regular.woff2) format('woff2'),url(https://res.kurly.com/fonts/NanumGothic-Regular.woff) format('woff'),url(https://res.kurly.com/fonts/NanumGothic-Regular.otf) format('opentype')
+}
+
+@font-face {
+    font-family: noto sans;
+    font-style: normal;
+    font-weight: 200;
+    src: url(https://res.kurly.com/fonts/NotoSansKR-Light.woff2) format('woff2'),url(https://res.kurly.com/fonts/NotoSansKR-Light.woff) format('woff'),url(https://res.kurly.com/fonts/NotoSansKR-Light.otf) format('opentype')
+}
+
+@font-face {
+    font-family: noto sans;
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://res.kurly.com/fonts/NotoSansKR-Regular.woff2) format('woff2'),url(https://res.kurly.com/fonts/NotoSansKR-Regular.woff) format('woff'),url(https://res.kurly.com/fonts/NotoSansKR-Regular.otf) format('opentype')
+}
+
+@font-face {
+    font-family: noto sans;
+    font-style: normal;
+    font-weight: 700;
+    src: url(https://res.kurly.com/fonts/NotoSansKR-Medium.woff2) format('woff2'),url(https://res.kurly.com/fonts/NotoSansKR-Medium.woff) format('woff'),url(https://res.kurly.com/fonts/NotoSansKR-Medium.otf) format('opentype')
+}
+
+@font-face {
+    font-family: noto sans;
+    font-style: normal;
+    font-weight: 800;
+    src: url(https://res.kurly.com/fonts/NotoSansKR-Bold.woff2) format('woff2'),url(https://res.kurly.com/fonts/NotoSansKR-Bold.woff) format('woff'),url(https://res.kurly.com/fonts/NotoSansKR-Bold.otf) format('opentype')
+}
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,
+h6,form,fieldset,legend,input,button,
+textarea,p,blockquote,th,td,a,span {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body, input, select, textarea, button {
+    font-family: noto sans,malgun gothic,AppleGothic,dotum;
+    line-height: 1;
+    letter-spacing: -.05em;
+    color: #4c4c4c;
+    font-size: 12px;
+    max-width: 100%;
+}
+
+div, th, td, li, dt, dd, p {
+    word-break: break-all;
+}
+
+img, video, canvas {
+    max-width: 100%;
+}
+
+img {
+    border: none;
+    vertical-align: top;
+}
+
+button {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+    background-color: transparent;
+    color: inherit;
+}
+
+a:active,a:hover {
+    outline: 0;
+    cursor: pointer;
+}
+
+b, strong {
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+
+fieldset {
+    border: none;
+}
+
+li {
+    list-style: none;
+}
+
+input {
+    line-height: normal;
+    outline: none;
+}
+
+*::after, *::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+

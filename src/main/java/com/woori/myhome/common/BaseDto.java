@@ -8,8 +8,8 @@ public class BaseDto {
 	protected int pgGroup=5;
 	protected int start=0;
 	protected int rnum=0;
-	
-	
+ 	
+	 
 	
 	public int getRnum() {
 		return rnum;

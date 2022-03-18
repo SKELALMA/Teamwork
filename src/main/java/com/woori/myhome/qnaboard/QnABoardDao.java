@@ -1,5 +1,5 @@
 package com.woori.myhome.qnaboard;
-
+ 
 import java.util.List;
 
 public interface QnABoardDao {

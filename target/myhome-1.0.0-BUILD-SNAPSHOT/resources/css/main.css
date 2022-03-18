@@ -1,0 +1,167 @@
+@charset "utf-8";
+
+        .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          user-select: none;
+        }
+  
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }
+  
+        .fix {
+          position: fixed;
+          top: 0px;
+          animation: down 0.5s ease
+        }
+  
+        @keyframes down {
+              0%{
+                  transform: translateY(-50px)
+              }
+              100%{
+                  transform: translateY(0px)
+              }
+        }
+        
+        img { max-width:100%; }
+
+/* ---------------------------------- 슬라이드 디자인 ------------------------------------*/
+a {
+    -webkit-transition: all 150ms ease;
+	-moz-transition: all 150ms ease;
+	-ms-transition: all 150ms ease;
+	-o-transition: all 150ms ease;
+	transition: all 150ms ease; 
+	}
+    
+a:hover {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; /* IE 8 */
+    filter: alpha(opacity=50); /* IE7 */
+    opacity: 0.6;
+    text-decoration: none;
+}
+
+body{
+    border-top:0;
+    background:#fff;
+}
+.btn-mini{
+    border-top: 1px solid #e8e8e8;
+    border-radius: 0px;
+    width: 100%;
+    color: #b2adad;
+}
+.casing{
+    border:1px solid #e8e8e8;
+    float:left;
+    width:100%;
+}
+.thumbnail {
+    padding: 0px !important;
+    border-radius: 0px !important;
+    border: none !important;
+}
+
+.thumbnails li> .fff .caption { 
+    background:#fff !important; 
+    padding:10px
+}
+
+.page-header {
+    background: #ffffff7a;
+    margin: 0px 0px 22px;
+    padding: 1px 40px;
+    border-top: 4px solid #ccc;
+    color: #999;
+    text-transform: uppercase;
+}
+.page-header p{
+    text-align:center;
+}
+
+.page-header h3 {
+    line-height: 0.88rem;
+    color: #000;
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+}
+
+ul.thumbnails { 
+    margin-bottom: 0px;
+}
+
+
+.caption h4 {
+    color: #444;
+    text-indent: 10px;
+}
+
+.caption p {  
+    color: #99a997;
+    padding: 0px 10px;
+}
+.control-box {
+    text-align: right;
+    width: 100%;
+    margin-top: -152px;
+}
+.carousel-control{
+    background: #666;
+    border: 0px;
+    border-radius: 0px;
+    display: inline-block;
+    font-size: 34px;
+    font-weight: 200;
+    line-height: 18px;
+    opacity: 0.5;
+    padding: 4px 10px 0px;
+    position: static;
+    height: 30px;
+    width: 15px;
+}
+
+@media (max-width: 767px) {
+    .page-header, .control-box {
+        text-align: center;
+    } 
+}
+@media (max-width: 479px) {
+    .caption {
+        word-break: break-all;
+    }
+}
+
+
+li { list-style-type:none;}
+
+::selection { background: #5eff79; color: #FFFFFF; text-shadow: 0; }
+::-moz-selection { background: #5eff79; color: #FFFFFF; }
+
+.left{
+    float:left;
+}
+.right{
+    float:right;
+    margin-right:-35px;
+}
+
+.arrowStil{
+    border-radius: 23px !important;
+    padding: 11px 14px !important;  
+}
+  
+/* ---------------------- 슬라이드 이미지 ---------------------------*/    
+    img{
+    width:300px;
+    height:150px;
+    object-fit:cover;
+    }    
+/* ---------------------- 슬라이드 글자 ---------------------------*/     
+div p { display: block; } p{ max-width: calc(100%); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }

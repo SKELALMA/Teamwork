@@ -32,10 +32,10 @@
 	%>
 
 	<form  name="myform" method="post" enctype="multipart/form-data">	
-		<input type="text" name="id" value="<%=dto.getId()%>" />
+		<input type="hidden" name="id" value="<%=dto.getId()%>" />
 		
     <div class="container" style="margin-top:80px">
-        <h2>갤러리 쓰기</h2>
+        <h2>자랑하기 글쓰기</h2>
 
         <table class="table table-hover " style="margin-top: 30px;">
             <colgroup>
@@ -57,11 +57,29 @@
                 <td>작성자</td>
                 <td>
                     <div class="mb-3" style="margin-top:13px;">
-                        <input type="text" class="form-control" id="writer" name="writer" 
-                        placeholder="이름을 입력하세요" value="<%=dto.getWriter()%>">
+					<input type="text" class="form-control" id="writer" name="writer" 
+                        placeholder="이름을 입력하세요" value="<%=userid%>" readonly>
                     </div>
                 </td>
-              </tr>      
+              </tr> 
+               <!-- <tr>
+                <td>카테고리</td>
+                <td>
+                   <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+					  <input type="radio" class="btn-check" name="category" id="btnradio1" autocomplete="off" value="한식">
+					  <label class="btn btn-outline-primary" for="btnradio1">한식</label>
+					
+					  <input type="radio" class="btn-check" name="category" id="btnradio2" autocomplete="off" value="중식">
+					  <label class="btn btn-outline-primary" for="btnradio2">중식</label>
+					
+					  <input type="radio" class="btn-check" name="category" id="btnradio3" autocomplete="off" value="일식">
+					  <label class="btn btn-outline-primary" for="btnradio3">일식</label>
+					  
+					  <input type="radio" class="btn-check" name="category" id="btnradio4" autocomplete="off" value="양식">
+					  <label class="btn btn-outline-primary" for="btnradio4">양식</label>
+					</div>
+                </td>
+              </tr> -->      
               <tr>
                 <td>내용</td>
                 <td>
@@ -204,7 +222,9 @@ function goWrite()
 		frm.writer.focus();
 		return false;
 	}
-	
+	//var category = $('input[name=category]').val();
+	//alert="category";
+	//alert(frm.category.value);
 	const editorData = editor.getData(); // <div><img>
 
 	var htmlObject = document.createElement('div');

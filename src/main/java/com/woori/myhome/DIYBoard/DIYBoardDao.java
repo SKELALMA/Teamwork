@@ -2,7 +2,7 @@ package com.woori.myhome.DIYBoard;
 
 import java.util.List;
 
-
+ 
 public interface DIYBoardDao {
 	List<DIYBoardDto> getList(DIYBoardDto dto);
 	int getTotal(DIYBoardDto dto);
@@ -11,4 +11,5 @@ public interface DIYBoardDao {
 	void delete(DIYBoardDto dto );
 	DIYBoardDto getView(DIYBoardDto dto);
 	void updateView(DIYBoardDto dto);
+	List<DIYBoardDto> getListHit(DIYBoardDto dto);
 }

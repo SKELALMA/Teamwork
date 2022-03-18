@@ -5,7 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
+ 
 @Repository("DIYboardDao")
 public class DIYBoardDaoImpl implements DIYBoardDao {
 	
@@ -50,6 +50,12 @@ public class DIYBoardDaoImpl implements DIYBoardDao {
 	@Override
 	public void updateView(DIYBoardDto dto) {
 		sm.update("DIY_updateView",dto);
+	}
+
+	@Override
+	public List<DIYBoardDto> getListHit(DIYBoardDto dto) {
+		// TODO Auto-generated method stub
+		return sm.selectList("DIY_getList_byhit",dto);
 	}
 
 }

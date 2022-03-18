@@ -21,11 +21,11 @@
   <h1>아이디찾기</h1>
 
   <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="아이디" name="userid" id="userid">
+    <input type="text" class="form-control" placeholder="아이디" name="user_id" id="user_id">
   </div>
 
   <div class="input-group mb-3">
-    <input type="text" class="form-control" name="email" id="email" placeholder="이메일">
+    <input type="text" class="form-control" name="user_mail" id="user_mail" placeholder="이메일">
   </div>
 
   
@@ -33,8 +33,8 @@
     
      <div class="btn-group">
        
-       <button type="button" class="btn btn-primary" onclick="goFindId()">패스워드찾기</button>&nbsp;&nbsp;
-       <button type="button" class="btn btn-primary" onclick="goCancel()">취소</button>&nbsp;&nbsp;
+       <button type="button" class="btn btn-success" onclick="goFindId()">패스워드찾기</button>&nbsp;&nbsp;
+       <button type="button" class="btn btn-danger" onclick="goCancel()">취소</button>&nbsp;&nbsp;
      </div>
         
    </div>
@@ -84,7 +84,7 @@ function goFindId()
 function goCancel()
 {
   var frm = document.form;
-   frm.action="/board/list";
+   frm.action="/member/login";
    frm.submit();
 }
 </script>

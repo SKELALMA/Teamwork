@@ -1,5 +1,5 @@
 package com.woori.myhome.noticeboard;
-
+ 
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -47,5 +47,10 @@ public class NoticeBoardDaoImpl implements NoticeBoardDao {
 
 		sm.update("NoticeBoard_update", dto);
 	}
+	@Override
+	   public void hit(NoticeBoardDto dto) {
+	      sm.update("NoticeBoard_hit", dto);
+	      
+	   }
 
 }

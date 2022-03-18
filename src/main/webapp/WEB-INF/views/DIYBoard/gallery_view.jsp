@@ -36,7 +36,7 @@
 			name="keyword" value="<%=keyword%>">
 
 		<div class="container" style="margin-top: 80px">
-			<h2>게시판 상세보기</h2>
+			<h2>자랑하기 게시판</h2>
 			<table class="table table-hover " style="margin-top: 30px;">
 				<colgroup>
 					<col style="width: 15%;" />
@@ -58,7 +58,7 @@
 						<th>작성일</th>
 						<td><%=dto.getWdate()%></td>
 						<th>조회수</th>
-						<td><%=dto.getHit()%></td>
+						<td><%=dto.getHit()+1%></td>
 					</tr>
 					<tr>
 						<th colspan="5">내용
@@ -81,15 +81,17 @@
 			</table>
 
 
-
+	
 			<div class="container mt-3" style="text-align: right;">
 				<a href="#none" onclick="goList()" class="btn btn-secondary">목록</a>
+				<%if (dto.getWriter().equals(userid) ) {%> 
 				<a href="#none" onclick="goModify()" class="btn btn-secondary">수정</a>
 				<a href="#none" onclick="goDelete()" class="btn btn-secondary">삭제</a>
+				<%} %>
 			</div>
 
-
-			<table class="table" style="margin-top: 20px" id="tbl_comment">
+<!-----------------------------댓글  ---------------------------->
+	<!-- 		<table class="table" style="margin-top: 20px" id="tbl_comment">
 				<colgroup>
 					<col width="10%">
 					<col width="*">
@@ -103,7 +105,7 @@
 				<tbody>
 
 				</tbody>
-			</table>
+			</table> 
 
 			<input type="hidden" name="userid" id="userid" value="<%=userid%>" />
 			<input type="hidden" name="comment_board_id" id="board_id"
@@ -119,7 +121,7 @@
 				<a href="#none" onclick="goCommentWrite()" class="btn btn-primary"><span
 					id="btnCommentSave">댓글등록</span></a>
 			</div>
-
+-->
 		</div>
 
 	</form>
@@ -128,9 +130,9 @@
 
 <script>
 
-$(function(){
+/* $(function(){
 	goInit();
-});
+}); */
 
 
 function goList()
@@ -157,7 +159,7 @@ function goDelete()
 		frm.submit();
 	}
 }
- 
+<%--  
 function goInit(){
 	
 	var frmData = new FormData(document.myform);
@@ -207,10 +209,10 @@ function goInit(){
 		console.log( error );
 	})
 }
+ --%>
+<%-- function goCommentWrite(){
 
-function goCommentWrite(){
-
-<%-- 	var userid='<%=userid%>'; --%>
+	var userid='<%=userid%>';
 //	if(userid==""){
 	
 //		alert("로그인하세요");
@@ -236,7 +238,7 @@ $.ajax({
 
 function goCommentModify(comment_id){
 
-<%-- 	var userid='<%=userid%>'; --%>
+	var userid='<%=userid%>';
 $("#comment_id").val(comment_id);
 //	if(userid==""){
 	
@@ -261,7 +263,7 @@ $.ajax({
 
 function goCommentDelete(comment_id){
 
-<%-- 	var userid='<%=userid%>'; --%>
+	var userid='<%=userid%>';
 $("#comment_id").val(comment_id);
 //	if(userid==""){
 	
@@ -291,14 +293,9 @@ $.ajax({
 	console.log( error );
 })
 }
+ --%>
 
 
-function goReply(){
-
-var frm = document.myform;
-frm.action="${commonURL}/qnaboard/reply";
-frm.submit();
-}
 
 
 </script>

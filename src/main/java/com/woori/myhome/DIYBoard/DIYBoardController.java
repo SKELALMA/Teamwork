@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.woori.myhome.common.FileUploadUtil;
 import com.woori.myhome.comment.CommentDto;
-
+ 
 @Controller
 public class DIYBoardController {
 	@Resource(name = "DIYboardService")
@@ -40,7 +40,23 @@ public class DIYBoardController {
 
 		return "DIYBoard/gallery_list";
 	}
+	@RequestMapping("/gallery/list/hit")
+	String gallery_list_Hit(Model model, DIYBoardDto dto) {
+		System.out.println("[controller] gallery_list");
+		dto.setPageSize(12);
+		dto.setStart(dto.getPg() * dto.getPageSize());
 
+		List<DIYBoardDto> list = service.getListHit(dto);
+
+		System.out.println("fensfsnff list: " + list);
+
+		int cnt = service.getTotal(dto);
+
+		model.addAttribute("galleryList", list);
+		model.addAttribute("totalCnt", cnt);
+
+		return "DIYBoard/gallery_list";
+	}
 	@RequestMapping("/gallery/write")
 	String gallery_write(Model model, DIYBoardDto paramDto) {
 		System.out.println("gallery_write : " + paramDto);
@@ -136,62 +152,63 @@ public class DIYBoardController {
 	
 //**************
 	
-	@RequestMapping(value="/comment/write")
-	@ResponseBody
-	HashMap<String, String> comment_write(CommentDto dto)
-	{
-		System.out.println("comment_id : " + dto.getComment_id());
-//		if( dto.getComment_id().equals(""))
-//			service.comment_insert(dto);
-//		else
-//			service.comment_update(dto);
-		
-		service.comment_insert(dto);
-		HashMap<String, String>map = new HashMap<String, String>();
-		map.put("result", "success");
-		return map; 
-	}
+//	@RequestMapping(value="/comment/write")
+//	@ResponseBody
+//	HashMap<String, String> comment_write(CommentDto dto)
+//	{
+//		System.out.println("comment_id : " + dto.getComment_id());
+////		if( dto.getComment_id().equals(""))
+////			service.comment_insert(dto);
+////		else
+////			service.comment_update(dto);
+//		
+//		service.comment_insert(dto);
+//		HashMap<String, String>map = new HashMap<String, String>();
+//		map.put("result", "success");
+//		return map; 
+//	}
+//	
+//	@RequestMapping(value="/comment/list")
+//	@ResponseBody
+//	List<CommentDto> comment_list(CommentDto dto)
+//	{
+//		System.out.println("board_id : " + dto.getComment_board_id());
+//		List<CommentDto> list = service.getCommentList(dto);
+//		return list; 
+//	}
+//	
+//	
+//	@RequestMapping(value="/comment/getView")
+//	@ResponseBody
+//	CommentDto comment_getView(CommentDto dto)
+//	{
+//		System.out.println("id : " + dto.getComment_id());
+//		CommentDto resultDto = service.getCommentView(dto);
+//		return resultDto; 
+//	}
+//	
+//	@RequestMapping(value="/comment/update")
+//	@ResponseBody
+//	HashMap<String, String> comment_update(CommentDto dto) {
+//		
+//		service.comment_update(dto);
+//		
+//		HashMap<String, String> map = new HashMap<String, String>();
+//		map.put("result", "success");
+//		
+//		return map;
+//	}
+//	
+//	@RequestMapping(value="/comment/delete")
+//	@ResponseBody
+//	HashMap<String, String> comment_delete(CommentDto dto)
+//	{
+//		service.comment_delete(dto);
+//		
+//		HashMap<String, String>map = new HashMap<String, String>();
+//		map.put("result", "success");
+//		return map; 
+//	}	
 	
-	@RequestMapping(value="/comment/list")
-	@ResponseBody
-	List<CommentDto> comment_list(CommentDto dto)
-	{
-		System.out.println("board_id : " + dto.getComment_board_id());
-		List<CommentDto> list = service.getCommentList(dto);
-		return list; 
-	}
-	
-	
-	@RequestMapping(value="/comment/getView")
-	@ResponseBody
-	CommentDto comment_getView(CommentDto dto)
-	{
-		System.out.println("id : " + dto.getComment_id());
-		CommentDto resultDto = service.getCommentView(dto);
-		return resultDto; 
-	}
-	
-	@RequestMapping(value="/comment/update")
-	@ResponseBody
-	HashMap<String, String> comment_update(CommentDto dto) {
-		
-		service.comment_update(dto);
-		
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("result", "success");
-		
-		return map;
-	}
-	
-	@RequestMapping(value="/comment/delete")
-	@ResponseBody
-	HashMap<String, String> comment_delete(CommentDto dto)
-	{
-		service.comment_delete(dto);
-		
-		HashMap<String, String>map = new HashMap<String, String>();
-		map.put("result", "success");
-		return map; 
-	}	
-	
+
 }

@@ -93,7 +93,7 @@ public class MemberController {
 		MemberDto resultDto = memberService.getInfo(dto);
 		HashMap<String, String> map = new HashMap<String, String>();
 		
-		System.out.println(resultDto);
+		System.out.println(resultDto.getUser_active());
 		
 		if(resultDto==null)
 		{
@@ -103,12 +103,18 @@ public class MemberController {
 		{
 			if(resultDto.getUser_password().equals(dto.getUser_password()))
 			{
-				map.put("flag", "1"); //로그온 성공시 세션에 정보를 저장한다 
-				session.setAttribute("userid", resultDto.getUser_id());
-				session.setAttribute("username", resultDto.getUser_name());
-				session.setAttribute("email", resultDto.getUser_mail());
-				session.setAttribute("phone", resultDto.getUser_phone());
-				session.setAttribute("level", resultDto.getUser_level());
+				
+				if(resultDto.getUser_active().equals("Y"))
+				{
+					map.put("flag", "1"); //로그온 성공시 세션에 정보를 저장한다 
+					session.setAttribute("userid", resultDto.getUser_id());
+					session.setAttribute("username", resultDto.getUser_name());
+					session.setAttribute("email", resultDto.getUser_mail());
+					session.setAttribute("phone", resultDto.getUser_phone());
+					session.setAttribute("level", resultDto.getUser_level());
+				}
+				else
+					map.put("flag", "4");
 			}
 			else
 			{
@@ -157,6 +163,7 @@ public class MemberController {
 			map.put("result", findDto.getUser_id());
 			map.put("userid", findDto.getUser_id());
 			map.put("username", findDto.getUser_name());
+			map.put("active",findDto.getUser_active());
 		}
 		return map;
 	}
