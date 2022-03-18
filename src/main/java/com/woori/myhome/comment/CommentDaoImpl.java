@@ -15,7 +15,7 @@ public class CommentDaoImpl implements CommentDao {
 	@Override
 	public List<CommentDto> getList(CommentDto dto) {
 		
-		return sm.selectList("Comment_list", dto);
+		return sm.selectList("Comment_getList", dto);
 	}
 	
 	@Override

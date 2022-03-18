@@ -60,7 +60,23 @@
             <button class="btn btn-secondary" type="button" onclick="goSearch()">Go</button>
           </div> 
 --%>
-		
+
+		    <div class="input-group mb-3" style="margin-top:20px; width:70%">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+            	id="searchItem">
+                선택하세요 
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" onclick="changeSearch('1')">선택하세요</a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeSearch('2')">제목</a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeSearch('3')">내용</a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeSearch('4')">제목+내용</a></li>
+            </ul>
+            <input type="text" class="form-control" placeholder="Search"
+            	name="keyword" id="keyword" value="<%=keyword%>">
+            <button class="btn btn-secondary" type="button" onclick="goSearch()">Go</button>
+          </div>
+          
 			<div class="btn-group" role="group" aria-label="Basic outlined example" style="margin-bottom: 30px; float: right">
 			
 			  <button type="button" class="btn btn-outline-primary " onClick="goList()" >최신순</button>

@@ -20,9 +20,11 @@ import com.woori.myhome.comment.CommentDto;
  
 @Controller
 public class DIYBoardController {
+
 	@Resource(name = "DIYboardService")
 	DIYBoardService service;
 
+	
 	@RequestMapping("/gallery/list")
 	String gallery_list(Model model, DIYBoardDto dto) {
 		System.out.println("[controller] gallery_list");
@@ -152,63 +154,64 @@ public class DIYBoardController {
 	
 //**************
 	
-//	@RequestMapping(value="/comment/write")
-//	@ResponseBody
-//	HashMap<String, String> comment_write(CommentDto dto)
-//	{
-//		System.out.println("comment_id : " + dto.getComment_id());
-////		if( dto.getComment_id().equals(""))
-////			service.comment_insert(dto);
-////		else
-////			service.comment_update(dto);
-//		
-//		service.comment_insert(dto);
-//		HashMap<String, String>map = new HashMap<String, String>();
-//		map.put("result", "success");
-//		return map; 
-//	}
-//	
-//	@RequestMapping(value="/comment/list")
-//	@ResponseBody
-//	List<CommentDto> comment_list(CommentDto dto)
-//	{
-//		System.out.println("board_id : " + dto.getComment_board_id());
-//		List<CommentDto> list = service.getCommentList(dto);
-//		return list; 
-//	}
-//	
-//	
-//	@RequestMapping(value="/comment/getView")
-//	@ResponseBody
-//	CommentDto comment_getView(CommentDto dto)
-//	{
-//		System.out.println("id : " + dto.getComment_id());
-//		CommentDto resultDto = service.getCommentView(dto);
-//		return resultDto; 
-//	}
-//	
-//	@RequestMapping(value="/comment/update")
-//	@ResponseBody
-//	HashMap<String, String> comment_update(CommentDto dto) {
-//		
-//		service.comment_update(dto);
-//		
-//		HashMap<String, String> map = new HashMap<String, String>();
-//		map.put("result", "success");
-//		
-//		return map;
-//	}
-//	
-//	@RequestMapping(value="/comment/delete")
-//	@ResponseBody
-//	HashMap<String, String> comment_delete(CommentDto dto)
-//	{
-//		service.comment_delete(dto);
-//		
-//		HashMap<String, String>map = new HashMap<String, String>();
-//		map.put("result", "success");
-//		return map; 
-//	}	
+	@RequestMapping(value="/gallery/comment/write")
+	@ResponseBody
+	HashMap<String, String> comment_write(CommentDto dto)
+	{
+		System.out.println("comment_id : " + dto.getComment_id());
+//		if( dto.getComment_id().equals(""))
+//			service.comment_insert(dto);
+//		else
+//			service.comment_update(dto);
+		
+		service.comment_insert(dto);
+		HashMap<String, String>map = new HashMap<String, String>();
+		map.put("result", "success");
+		return map; 
+	}
+	
+	@RequestMapping(value="/gallery/comment/list")
+	@ResponseBody
+	List<CommentDto> comment_list(CommentDto dto)
+	{
+		dto.setComment_board_loc("2");
+		System.out.println("board_id : " + dto.getComment_board_id());
+		List<CommentDto> list = service.getCommentList(dto);
+		return list; 
+	}
+	
+	
+	@RequestMapping(value="/gallery/comment/getView")
+	@ResponseBody
+	CommentDto comment_getView(CommentDto dto)
+	{
+		System.out.println("id : " + dto.getComment_id());
+		CommentDto resultDto = service.getCommentView(dto);
+		return resultDto; 
+	}
+	
+	@RequestMapping(value="/gallery/comment/update")
+	@ResponseBody
+	HashMap<String, String> comment_update(CommentDto dto) {
+		
+		service.comment_update(dto);
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("result", "success");
+		
+		return map;
+	}
+	
+	@RequestMapping(value="/gallery/comment/delete")
+	@ResponseBody
+	HashMap<String, String> comment_delete(CommentDto dto)
+	{
+		service.comment_delete(dto);
+		
+		HashMap<String, String>map = new HashMap<String, String>();
+		map.put("result", "success");
+		return map; 
+	}	
 	
 
 }

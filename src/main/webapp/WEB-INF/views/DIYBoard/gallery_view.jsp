@@ -10,6 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 
+
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -91,7 +92,7 @@
 			</div>
 
 <!-----------------------------댓글  ---------------------------->
-	<!-- 		<table class="table" style="margin-top: 20px" id="tbl_comment">
+			<table class="table" style="margin-top: 20px" id="tbl_comment">
 				<colgroup>
 					<col width="10%">
 					<col width="*">
@@ -107,10 +108,9 @@
 				</tbody>
 			</table> 
 
-			<input type="hidden" name="userid" id="userid" value="<%=userid%>" />
-			<input type="hidden" name="comment_board_id" id="board_id"
-				value="<%=dto.getId()%>" /> <input type="hidden" name="comment_id"
-				id="comment_id" value="" />
+			<input type="hidden" name="comment_userid" id="userid" value="<%=userid%>" />
+			<input type="hidden" name="comment_board_id" id="board_id" value="<%=dto.getId()%>" /> 
+				<input type="hidden" name="comment_id" id="comment_id" value="" />
 
 			<div class="mb-3" style="margin-top: 13px;">
 				<textarea class="form-control" rows="3" id="comment" name="comment"></textarea>
@@ -121,7 +121,7 @@
 				<a href="#none" onclick="goCommentWrite()" class="btn btn-primary"><span
 					id="btnCommentSave">댓글등록</span></a>
 			</div>
--->
+
 		</div>
 
 	</form>
@@ -130,9 +130,9 @@
 
 <script>
 
-/* $(function(){
+$(function(){
 	goInit();
-}); */
+}); 
 
 
 function goList()
@@ -159,19 +159,20 @@ function goDelete()
 		frm.submit();
 	}
 }
-<%--  
+  
 function goInit(){
 	
 	var frmData = new FormData(document.myform);
 	console.log( $("#board_id").val() );
 	
 	$.ajax({
-		url:"${commonURL}/comment/list?comment_board_id="+$("#board_id").val(),
+		url:"${commonURL}/gallery/comment/list?comment_board_id="+$("#board_id").val(),
 		type:"GET",
 		dataType:"JSON"
 	})
 	.done( (result)=>{
-//		console.log( result );
+		
+		console.log( "들어와주라제발" );
 		//데이터가 배열형태로 전달받음
 		//forEach( (item)=>{}) 배열이 요소 하나하나마다 함수를 호출해준다
 		//각 요소를 매개변수로 전달
@@ -209,10 +210,11 @@ function goInit(){
 		console.log( error );
 	})
 }
- --%>
-<%-- function goCommentWrite(){
+
+function goCommentWrite(){
 
 	var userid='<%=userid%>';
+	console.log
 //	if(userid==""){
 	
 //		alert("로그인하세요");
@@ -221,7 +223,7 @@ function goInit(){
 var queryString = $("form[name=myform]").serialize();
 
 $.ajax({
-	url:"${commonURL}/comment/write",
+	url:"${commonURL}/gallery/comment/write",
 	data:queryString,
 	type:"POST"
 })
@@ -247,7 +249,7 @@ $("#comment_id").val(comment_id);
 //	}
 
 $.ajax({
-	url:"${commonURL}/comment/getView?comment_id="+comment_id,
+	url:"${commonURL}/gallery/comment/getView?comment_id="+comment_id,
 	type:"GET",
 	dataType:"JSON"
 })
@@ -264,6 +266,7 @@ $.ajax({
 function goCommentDelete(comment_id){
 
 	var userid='<%=userid%>';
+	
 $("#comment_id").val(comment_id);
 //	if(userid==""){
 	
@@ -278,7 +281,7 @@ var queryString = $("form[name=myform]").serialize();
 console.log(queryString);
 
 $.ajax({
-	url:"${commonURL}/comment/delete",
+	url:"${commonURL}/gallery/comment/delete",
 	data:queryString,
 	type:"POST"
 })
@@ -293,7 +296,7 @@ $.ajax({
 	console.log( error );
 })
 }
- --%>
+
 
 
 

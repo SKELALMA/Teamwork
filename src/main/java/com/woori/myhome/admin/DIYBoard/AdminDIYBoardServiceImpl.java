@@ -15,8 +15,8 @@ public class AdminDIYBoardServiceImpl implements AdminDIYBoardService{
 	@Resource(name="adminDIYboardDao")
 	AdminDIYBoardDao dao;
 	
-//	@Resource(name="commentDao")
-//	CommentDao commentDao;
+	@Resource(name="commentDao")
+	CommentDao commentDao;
 	
 	@Override
 	public List<AdminDIYBoardDto> getList(AdminDIYBoardDto dto) {
@@ -67,41 +67,5 @@ public class AdminDIYBoardServiceImpl implements AdminDIYBoardService{
 
 	
 
-	
-	
-	//************** ���
-//	@Override
-//	public void comment_insert(CommentDto dto) {
-//		// TODO Auto-generated method stub
-//		commentDao.insert(dto);
-//	}
-//
-//	@Override
-//	public List<CommentDto> getCommentList(CommentDto dto) {
-//		// TODO Auto-generated method stub
-//		return commentDao.getList(dto);
-//	}
-//
-//	@Override
-//	public CommentDto getCommentView(CommentDto dto) {
-//		// TODO Auto-generated method stub
-//		return commentDao.comment_getView(dto);
-//	}
-//
-//	@Override
-//	public void comment_update(CommentDto dto) {
-//		commentDao.comment_update(dto);
-//	}
-//
-//	@Override
-//	public void comment_delete(CommentDto dto) {
-//		commentDao.comment_delete(dto);
-//	}
-//
-//	@Override
-//	public List<AdminDIYBoardDto> getListHit(AdminDIYBoardDto dto) {
-//		// TODO Auto-generated method stub
-//		return dao.getListHit(dto);
-//	}
 
 }
