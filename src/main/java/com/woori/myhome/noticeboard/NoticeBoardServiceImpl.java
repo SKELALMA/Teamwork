@@ -76,7 +76,7 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 
 		commentDao.comment_update(dto);
 	}
-
+ 
 	@Override
 	public void comment_delete(CommentDto dto) {
 		
