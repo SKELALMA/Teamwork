@@ -11,7 +11,7 @@
    DIYBoardDto dto = (DIYBoardDto) request.getAttribute("galleryDto");
    List<DIYBoardDto> list = (List<DIYBoardDto>)request.getAttribute("galleryList");
    List<ReceipeBoardDto> relist = (List<ReceipeBoardDto>)request.getAttribute("receipeList");
-   List<NoticeBoardDto> nlist = (List<NoticeBoardDto>)request.getAttribute("noticeBoardList");
+   List<NoticeBoardDto> nlist = (List<NoticeBoardDto>)request.getAttribute("noticeboard_list");
 %>
 
 
@@ -65,7 +65,7 @@
 <div class="col-xs-12">
 
 <input type="hidden" name="id"  id="id" value=""/>
-
+<input type="hidden" name="notice_id"  id="id" value=""/>
     <div class="carousel slide" id="myRecipe">
         <div class="carousel-inner">
             <div class="item active">
@@ -200,7 +200,7 @@
 </br>
 </br>
 </br>
-</form>
+
 
 
 <!------------------------------------ 공지사항  ---------------------------------------->
@@ -239,6 +239,44 @@
  --%>
  
 
+<div class="container marketing">
+    <div class="page-header">
+        <h3>공지사항</h3>
+        <p>냉장고가 말합니다!</p>
+    </div>
+         <table class="table table-hover ">
+           <colgroup>
+              <col width="8%">
+              <col width="12%">
+              <col width="12%">
+           </colgroup>
+            <thead class="table-success">
+              <tr>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+              </tr>
+            </thead>
+       <tbody>
+       
+        
+           
+        <%  for( int i=0; i<4; i++){ %>         
+			                          
+                 <td><a href="#" onclick="goNoticeView('<%=nlist.get(i).getNotice_id() %>')">
+                 	<%=nlist.get(i).getNotice_title()%></a></td> 
+                 <td>관리자</td>
+                <td ><%=nlist.get(i).getNotice_wdate()%></td>
+               </tr> 
+               
+               <%} %>
+           
+           
+        </tbody>
+            </table>
+
+</div>
+</form>
 <!------------------------------------ 주변 마트 찾기 ---------------------------------------->
 <div class="container marketing">
     <div class="page-header">
@@ -288,22 +326,15 @@
 
 <!-- 메뉴바 상단 고정 변수-->
 <script>
-    function navigo (){
-          const header = document.getElementById("menu");
-          const headerheight = header.clientHeight;
-          document.addEventListener('scroll', onScroll, { passive: true });
-          function onScroll () {
-              const scrollposition = pageYOffset;
-              const nav = document.getElementById("menu");
-              if (headerheight<=scrollposition){
-                  nav.classList.add('fix')
-              }
-              else {
-                  nav.classList.remove('fix');
-              }
-          } 
-      }
-      navigo()
+function goNoticeView(id){
+    
+    frm = document.myform;
+    frm.notice_id.value=id;
+    alert(frm.notice_id.value);
+    frm.method="get";
+    frm.action="${pageContext.request.contextPath}/noticeboard/view";
+    frm.submit();
+ }
       
 	 function goReCeipeView(id)
   {
