@@ -65,6 +65,7 @@ public class ReceipeBoardServiceImpl implements ReceipeBoardService{
 	@Override
 	public void comment_insert(CommentDto dto) {
 		// TODO Auto-generated method stub
+		//dto.setComment_board_loc("1");
 		commentDao.insert(dto);
 	}
 

@@ -110,7 +110,7 @@
 
 			<input type="hidden" name="comment_userid" id="userid" value="<%=userid%>" />
 			<input type="hidden" name="comment_board_id" id="board_id" value="<%=dto.getId()%>" /> 
-				<input type="hidden" name="comment_id" id="comment_id" value="" />
+			<input type="hidden" name="comment_id" id="comment_id" value="" />
 
 			<div class="mb-3" style="margin-top: 13px;">
 				<textarea class="form-control" rows="3" id="comment" name="comment"></textarea>
@@ -172,7 +172,7 @@ function goInit(){
 	})
 	.done( (result)=>{
 		
-		console.log( "들어와주라제발" );
+	
 		//데이터가 배열형태로 전달받음
 		//forEach( (item)=>{}) 배열이 요소 하나하나마다 함수를 호출해준다
 		//각 요소를 매개변수로 전달
@@ -183,7 +183,7 @@ function goInit(){
 			console.log("*");
 		}
 		
-		console.log(result);
+		console.log(result);	//object날라옴
 		var userid='<%=userid%>';
 		
 		var i=1;
@@ -191,14 +191,15 @@ function goInit(){
 			var data = "<tr>";
 				data += "<td>"+ i +"</td>";
 				data += "<td>"+item.comment+"</td>";
-				
-// 				if(userid==item.userid)
+				data += "<td>"+item.comment_userid+"</td>";
+				data += "<td>"+item.comment_wdate+"</td>";
+ 				if(userid==item.comment_userid)
 					data += "<td>"+item.username
 						 +"&nbsp<button type='button' onclick=goCommentModify('"+item.comment_id+"')>수정</button>"
 						 +"&nbsp<button type='button' onclick=goCommentDelete('"+item.comment_id+"')>삭제</button>"
 						 +"</td>";
-// 				else
-// 					data += "<td>"+item.username+"</td>";
+ 				else
+ 					data += "<td>"+item.username+"</td>";
 				data += "</tr>";
 				i++;
 			console.log(data);
@@ -215,11 +216,11 @@ function goCommentWrite(){
 
 	var userid='<%=userid%>';
 	console.log
-//	if(userid==""){
+	if(userid==""){
 	
-//		alert("로그인하세요");
-//		location.href="${commonURL}/member/login";
-//	}
+		alert("로그인하세요");
+		location.href="${commonURL}/member/login";
+	}
 var queryString = $("form[name=myform]").serialize();
 
 $.ajax({
@@ -229,7 +230,7 @@ $.ajax({
 })
 .done( (result)=>{
 	$("#comment").val("");
-	$("#btnCommentSave").html("답글등록");
+	$("#btnCommentSave").html("댓글등록");
 	$("#comment_id").val("");
 	goInit();
 })

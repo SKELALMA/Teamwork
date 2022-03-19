@@ -32,23 +32,9 @@
 				<input type="hidden" name="pg" id="pg" value="<%=pg%>"/>
 				<input type="hidden" name="notice_id" id="notice_id" value=""/>
 			
-			    <div class="container" style="margin-top:30px">
-			        <h2>공지사항 게시판 (${totalCnt}건)</h2>   <!-- 배열은 $ (== < %=request.getAttribute("totalCnt")%>) 표현식 못씀 -->
-			
-			        <div class="input-group mb-3" style="margin-top:20px;">
-			            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" id="searchItem">
-			                선택하세요
-			            </button>
-			            <ul class="dropdown-menu">
-			              <li><a class="dropdown-item" href="#" onclick="changeSearch('1')">선택하세요</a></li>
-			              <li><a class="dropdown-item" href="#" onclick="changeSearch('2')">제목</a></li>
-			              <li><a class="dropdown-item" href="#" onclick="changeSearch('3')">내용</a></li>
-			              <li><a class="dropdown-item" href="#" onclick="changeSearch('4')">제목+내용</a></li>
-			            </ul>
-			            <input type="text" class="form-control" placeholder="Search" name="keyword" id="keyword" value="<%=keyword%>"> <!-- id는 식별용 name은 서버로 보내는용 -->
-			            <button class="btn btn-secondary" type="button" onclick="goSearch()">Go</button>
-			          </div>
-			
+			    <div class="container" style="margin-top:30px ">
+			        <h2 style="margin-bottom:40px">공지사항 게시판 (${totalCnt}건)</h2>   <!-- 배열은 $ (== < %=request.getAttribute("totalCnt")%>) 표현식 못씀 -->
+					
 			        <table class="table table-hover ">
 			        	<colgroup>
 			        		<col width="8%">
@@ -61,7 +47,8 @@
 			                <th>번호</th>
 			                <th>제목</th>
 			                <th>작성자</th>
-			                <th>작성일</th>
+			                <th style="text-align:center;">작성일</th>
+			                <th style="text-align:center;">삭제</th>
 			              </tr>
 			            </thead>
 			            <tbody>
@@ -79,7 +66,9 @@
 			                 -->
 			                <td><a href="#none" onclick="goView('<%=tempDto.getNotice_id() %>')"><%=tempDto.getNotice_title()%></a></td>
 			                <td>관리자</td>
-			                <td><%=tempDto.getNotice_wdate()%></td>
+			                <td style="text-align:center;"><%=tempDto.getNotice_wdate()%></td>
+			                <td style="text-align:center;"><button type="button" onClick="adminDelete('<%=tempDto.getNotice_id() %>')">삭제하기</button></td>
+
 			              </tr>
 			            <%}%>
 			            </tbody>
@@ -113,6 +102,16 @@ window.onload=function(){
 	
 }
 
+function adminDelete(id){
+		
+	let frm = document.myform;
+	frm.notice_id.value=id;
+	alert(frm.notice_id.value);
+	frm.action = "<%=request.getContextPath()%>/admin/noticeboard/delete";
+	frm.method="get";
+	frm.submit();
+
+}
 
 function changeSearch(id){
 	

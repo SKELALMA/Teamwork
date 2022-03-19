@@ -104,9 +104,11 @@ public class AdminQnABoardController {
 	@RequestMapping(value="/admin/qnaboard/delete")
 	String board_delete(AdminQnABoardDto dto)
 	{
+		System.out.println("잘들어온다 ***** ");
+		System.out.println("qna_id : "+dto.getQna_id());
 		service.delete(dto);
 		
-		return "redirect:/qnaboard/list";  //글쓰고나면
+		return "redirect:/admin/qnaboard/list";  //글쓰고나면
 	}
 	
 	@RequestMapping(value="/admin/qnaboard/modify")

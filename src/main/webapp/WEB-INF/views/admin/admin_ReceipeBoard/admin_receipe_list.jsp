@@ -27,77 +27,70 @@
 
 <%@include file="../include/nav.jsp" %>
 
-<form name="myform" method="get">
-	<input type="hidden" name="key" id="key" value="<%=key%>"/>
-	<input type="hidden" name="pg"  id="pg" value="<%=pg%>"/>
-	<input type="hidden" name="id"  id="id" value=""/>
 
 
-    <!-- <div class="container" style="margin-top:10px"> -->
-    
-    	<div class="row">
-    	
-        		<div class="col-md-10">
-    		
-    		<div>
-
-
-    <div class="container" style="margin-top:80px">
-        <h2>레시피 목록 (${totalCnt}건)</h2>
-
-        <div class="input-group mb-3" style="margin-top:20px;">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-            	id="searchItem">
-                선택하세요
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#" onclick="changeSearch('1')">선택하세요</a></li>
-              <li><a class="dropdown-item" href="#" onclick="changeSearch('2')">제목</a></li>
-              <li><a class="dropdown-item" href="#" onclick="changeSearch('3')">내용</a></li>
-              <li><a class="dropdown-item" href="#" onclick="changeSearch('4')">제목+내용</a></li>
-            </ul>
-            <input type="text" class="form-control" placeholder="Search"
-            	name="keyword" id="keyword" value="<%=keyword%>">
-            <button class="btn btn-secondary" type="button" onclick="goSearch()">Go</button>
-          </div>
-
-        	<div class="row">
-        	
-             <!-- 한행시작 -->
-            <% for( AdminReceipeBoardDto dto : list){ %>
-            <div class="col-sm-3">
-              <div class="thumbnail">
-              <!-- http://localhost:8080/myhome/upload/christmas(2).jpg -->
-                  
-                <%-- <a href="../upload/<%=dto.getImage()%>" target="_blank"> --%>
-                <%-- <img src="../upload/<%=dto.getImage()%>" alt="Lights" style="width:100%"> --%>
-                <a href="<%=request.getContextPath()%>/upload/<%=dto.getImage()%>" target="_blank"></a>
-                <img src="<%=request.getContextPath()%>/upload/<%=dto.getImage()%>"alt="Lights" style="width:100%">
-                  <div class="caption">
-                    <a href="#none" onclick="goView('<%=dto.getId()%>')"><p><%=dto.getTitle()%></p></a>
-                  </div>
-                </a>
-              </div>
-            </div>
-           <%} %>
-           
-             <!-- 한행종료 -->
-          </div>
-
-
+			<form name="myform" method="get">
+				<input type="hidden" name="key" id="key" value="<%=key%>"/>
+				<input type="hidden" name="pg" id="pg" value="<%=pg%>"/>
+				<input type="hidden" name="id" id="id" value=""/>
+			
+			    <div class="container" style="margin-top:30px ">
+			        <h2 style="margin-bottom:40px">레시피 게시판 (${totalCnt}건)</h2>   <!-- 배열은 $ (== < %=request.getAttribute("totalCnt")%>) 표현식 못씀 -->
+					
+			        <table class="table table-hover ">
+			        	<colgroup>
+			        		<col width="8%">
+			        		<col width="*">
+			        		<col width="12%">
+			        		<col width="12%">
+			        	</colgroup>
+			            <thead class="table-secondary">
+			              <tr>
+			                <th>번호</th>
+			                <th>제목</th>
+			                <th>작성자</th>
+			                <th style="text-align:center;">작성일</th>
+			                <th style="text-align:center;">삭제</th>
+			              </tr>
+			            </thead>
+			            <tbody>
+			            <%
+			            
 		
- 		  <div class="container mt-3" style="text-align:right;">
-       	  	<%=Pager.makeTag(request, 12, totalCnt)%>
-       	  </div>
-       	  
-          <div class="container mt-3" style="text-align:right;">
-            <a href="<%=request.getContextPath()%>/receipe/write" 
-               class="btn btn-secondary">글쓰기</a>
-          </div>
-          
-    </div>
-    
-   </form>
+			           	for(AdminReceipeBoardDto tempDto : list){
+			            %>
+			              <tr>
+			                <td><%=totalCnt - tempDto.getRnum()+1%></td>
+			                <!-- 
+			                < %
+			                String url=request.getContextPath()+"/board/view?id="+tempDto.getId();
+			                %>
+			                 -->
+			                <td><a href="#none" onclick="goView('<%=tempDto.getId() %>')"><%=tempDto.getTitle()%></a></td>
+			                <td><%=tempDto.getWriter() %></td>
+			                <td style="text-align:center;"><%=tempDto.getWdate()%></td>
+			                <td style="text-align:center;"><button type="button" onClick="adminDelete('<%=tempDto.getId() %>')">삭제하기</button></td>
+
+			              </tr>
+			            <%}%>
+			            </tbody>
+			          </table>
+			 
+			          <div class="container mt-3" style="text-align:right;">
+			          	<%=Pager.makeTag(request, 10, totalCnt) %>
+			          </div>
+			
+			          <div class="container mt-3" style="text-align:right;">
+			            <a href="<%=request.getContextPath()%>/noticeboard/write" 
+			               class="btn btn-secondary">글쓰기</a>
+			          </div>
+			          
+			    </div> <!-- container -->
+			    
+			</form>
+   		</div><!-- //#content -->
+	</div><!-- //#container -->
+</div><!-- //#wrap -->
 </body>
 </html>
 
@@ -107,6 +100,14 @@ window.onload=function(){
 	let key = '<%=key%>';
 	var texts=["", "선택하세요", "제목", "내용", "제목+내용"];
 	document.getElementById("searchItem").innerHTML=texts[key];
+}
+
+function adminDelete(id){
+	let frm = document.myform;
+	frm.id.value=id;
+	frm.action = "<%=request.getContextPath()%>/admin/receipe/delete";
+	frm.method="get";
+	frm.submit();
 }
 
 

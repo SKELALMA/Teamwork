@@ -223,6 +223,7 @@ public class ReceipeBoardController {
 	@ResponseBody
 	HashMap<String, String> comment_write(CommentDto dto)
 	{
+		dto.setComment_board_loc("1");
 		System.out.println("comment_id : " + dto.getComment_id());
 //		if( dto.getComment_id().equals(""))
 //			service.comment_insert(dto);
@@ -239,6 +240,7 @@ public class ReceipeBoardController {
 	@ResponseBody
 	List<CommentDto> comment_list(CommentDto dto)
 	{
+		dto.setComment_board_loc("1");
 		System.out.println("board_id : " + dto.getComment_board_id());
 		List<CommentDto> list = service.getCommentList(dto);
 		return list; 

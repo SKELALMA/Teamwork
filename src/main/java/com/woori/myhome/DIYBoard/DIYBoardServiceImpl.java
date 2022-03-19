@@ -62,7 +62,7 @@ public class DIYBoardServiceImpl implements DIYBoardService{
 	@Override
 	public void comment_insert(CommentDto dto) {
 		// TODO Auto-generated method stub
-		dto.setComment_board_loc("2");
+		
 		commentDao.insert(dto);
 	}
 

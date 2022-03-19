@@ -59,80 +59,17 @@ public class AdminNoticeBoardController {
 		return "redirect:admin/noticeboard/list";  //글쓰고나면
 	}
 	
-//	@RequestMapping(value="/board/delete")
-//	String board_delete(BoardDto dto)
-//	{
-//		service.delete(dto.getId());
-//		
-//		return "redirect:/board/list";  //글쓰고나면
-//	}
-//	
-//	@RequestMapping(value="/board/modify")
-//	String board_modify(BoardDto dto, Model model) {
-//		
-//		model.addAttribute("boardDto", service.getView(dto.getId()) );
-//		
-//		return "board/board_write"; //write.jsp로 이동한다
-//	}
-//	
-//	@RequestMapping(value="/comment/write")
-//	@ResponseBody
-//	HashMap<String, String> comment_write(CommentDto dto) {
-//		
-//		System.out.println("comment_id : " + dto.getComment_id());
-//		if( dto.getComment_id().equals(""))
-//			service.comment_insert(dto);
-//		else
-//			service.comment_update(dto);
-//		
-//		HashMap<String, String> map = new HashMap<String, String>();
-//		map.put("result", "success");
-//		
-//		return map;
-//	}
-//	
-//	@RequestMapping(value="/comment/list")
-//	@ResponseBody
-//	List<CommentDto> comment_list(CommentDto dto) {
-//		
-//		System.out.println("board_id : " + dto.getBoard_id());
-//		List<CommentDto> list = service.getCommentList(dto);		
-//		return list;
-//	}
-//	
-//	@RequestMapping(value="/comment/getView")
-//	@ResponseBody
-//	CommentDto comment_getView(CommentDto dto) {
-//		
-//		System.out.println("id : " + dto.getId());
-//		CommentDto resultDto = service.getCommentView(dto);		
-//		return resultDto;
-//	}
-//	
-//	@RequestMapping(value="/comment/update")
-//	@ResponseBody
-//	HashMap<String, String> comment_update(CommentDto dto) {
-//		
-//		service.comment_update(dto);
-//		
-//		HashMap<String, String> map = new HashMap<String, String>();
-//		map.put("result", "success");
-//		
-//		return map;
-//	}
-//	
-//	@RequestMapping(value="/comment/delete")
-//	@ResponseBody
-//	HashMap<String, String> comment_delete(CommentDto dto) {
-//		
-//		service.comment_delete(dto);
-//		
-//		HashMap<String, String> map = new HashMap<String, String>();
-//		map.put("result", "success");
-//		
-//		return map;
-//	}
+	@RequestMapping(value="/admin/noticeboard/delete")
+	String noticeboard_delete(AdminNoticeBoardDto dto)
+	{
+		System.out.println("아이디 : "+dto.getNotice_id());
+		service.delete(dto);
+		
+		return "redirect:/admin/noticeboard/list";  //글쓰고나면
+	}
 	
+
+
 	
 	
 }

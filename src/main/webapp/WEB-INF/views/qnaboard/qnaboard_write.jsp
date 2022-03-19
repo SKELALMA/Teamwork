@@ -41,7 +41,7 @@
 		<input type="hidden" name="mode"     id="mode"     value="<%=mode %>" />
 		
     <div class="container" style="margin-top:80px">
-        <h2>게시판 쓰기</h2>
+        <h2>QnA 쓰기</h2>
 
         <table class="table table-hover " style="margin-top: 30px;">
             <colgroup>

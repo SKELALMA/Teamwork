@@ -39,7 +39,7 @@ public class AdminNoticeBoardDaoImpl implements AdminNoticeBoardDao {
 	@Override
 	public void delete(AdminNoticeBoardDto dto) {
 
-		sm.delete("AdminNotice", dto);
+		sm.delete("AdminNoticeBoard_delete", dto);
 	}
 
 	@Override

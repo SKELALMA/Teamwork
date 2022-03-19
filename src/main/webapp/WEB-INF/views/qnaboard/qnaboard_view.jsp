@@ -34,7 +34,7 @@
 		<input type="hidden" name="keyword" value="<%=keyword%>" >
 	
     <div class="container" style="margin-top:80px">
-        <h2>게시판 상세보기</h2>
+        <h2>QnA 상세보기</h2>
         <table class="table table-hover " style="margin-top:30px;">
             <tbody>
               <tr class="table-secondary">
@@ -152,12 +152,12 @@ function goInit(){
 	console.log( $("#board_id").val() );
 	
 	$.ajax({
-		url:"${commonURL}/comment/list?comment_board_id="+$("#board_id").val(),
+		url:"${commonURL}/qnaboard/comment/list?comment_board_id="+$("#board_id").val(),
 		type:"GET",
 		dataType:"JSON"
 	})
 	.done( (result)=>{
-//		console.log( result );
+		//console.log( result );
 		//데이터가 배열형태로 전달받음
 		//forEach( (item)=>{}) 배열이 요소 하나하나마다 함수를 호출해준다
 		//각 요소를 매개변수로 전달
@@ -168,7 +168,7 @@ function goInit(){
 			console.log("*");
 		}
 		
-		console.log(result);
+		console.log("test111112"+result);
 		var userid='<%=userid%>';
 		
 		var i=1;
@@ -176,7 +176,8 @@ function goInit(){
 			var data = "<tr>";
 				data += "<td>"+ i +"</td>";
 				data += "<td>"+item.comment+"</td>";
-				
+				data += "<td>"+item.comment_userid+"</td>";
+				data += "<td>"+item.comment_wdate+"</td>";
 // 				if(userid==item.userid)
 					data += "<td>"+item.username
 						 +"&nbsp<button type='button' onclick=goCommentModify('"+item.comment_id+"')>수정</button>"
@@ -207,13 +208,13 @@ function goCommentWrite(){
 	var queryString = $("form[name=myform]").serialize();
 
 	$.ajax({
-		url:"${commonURL}/comment/write",
+		url:"${commonURL}/qnaboard/comment/write",
 		data:queryString,
 		type:"POST"
 	})
 	.done( (result)=>{
 		$("#comment").val("");
-		$("#btnCommentSave").html("답글등록");
+		$("#btnCommentSave").html("댓글등록");
 		$("#comment_id").val("");
 		goInit();
 	})
@@ -233,7 +234,7 @@ function goCommentModify(comment_id){
 // 	}
 
 	$.ajax({
-		url:"${commonURL}/comment/getView?comment_id="+comment_id,
+		url:"${commonURL}/qnaboard/comment/getView?comment_id="+comment_id,
 		type:"GET",
 		dataType:"JSON"
 	})
@@ -264,7 +265,7 @@ function goCommentDelete(comment_id){
 	console.log(queryString);
 	
 	$.ajax({
-		url:"${commonURL}/comment/delete",
+		url:"${commonURL}/qnaboard/comment/delete",
 		data:queryString,
 		type:"POST"
 	})

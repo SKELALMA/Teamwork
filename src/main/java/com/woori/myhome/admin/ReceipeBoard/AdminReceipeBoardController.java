@@ -101,7 +101,7 @@ public class AdminReceipeBoardController {
 
 		service.delete(dto);
 
-		return "redirect:/receipe/list";
+		return "redirect:/admin/receipe/list";
 	}
 	
 
@@ -114,89 +114,7 @@ public class AdminReceipeBoardController {
 					
 		return "ReceipeBoard/receipe_write";
 	}
-	
-//
-////	@ResponseBody // json 占쎌굨占쎈뻼 �뵳�뗪쉘
-////	@RequestMapping(value = "/ck/fileupload3", method = { RequestMethod.POST, RequestMethod.GET })
-////	public String fileUpload(AdminReceipeBoardDto dto, HttpServletRequest req, MultipartHttpServletRequest multi) {
-////
-////		List<MultipartFile> multiList = new ArrayList<MultipartFile>();
-////		multiList.add(multi.getFile("upload"));
-////		System.out.println("-------------------->ck占쎈퓠占쎈탵占쎄숲: " + multi.getFile("upload").getOriginalFilename());
-////		List<String> fileNameList = new ArrayList<String>();
-////
-////		String path = req.getServletContext().getRealPath("/");
-////		System.out.println("�눧�눖�봺占쎌읅占쎌맄燁살꼵而� : " + path);
-////
-////		// 占쎈뼄占쎌젫 占쎈솁占쎌뵬占쎌뵠 占쎈씜嚥≪뮆諭� 占쎈┷占쎈뮉 �겫占썽겫占�   //url 占쎌뵠 �겫占썽겫占� 
-////		FileUploadUtil.upload(path, multiList, fileNameList);
-////		
-////		System.out.println("{ \"uploaded\" : true, \"url\" : \"http://localhost:8080/myhome/upload/"
-////				+ fileNameList.get(0) + "\" }");
-////		String url = "{ \"uploaded\" : true, \"url\" : \"http://localhost:8080/myhome/upload/" + fileNameList.get(0) + "\" }";
-////	
-////		return url;
-////	}
 
 	
-//**************
-//	
-//	@RequestMapping(value="/admin/receipe/comment/write")
-//	@ResponseBody
-//	HashMap<String, String> comment_write(CommentDto dto)
-//	{
-//		System.out.println("comment_id : " + dto.getComment_id());
-////		if( dto.getComment_id().equals(""))
-////			service.comment_insert(dto);
-////		else
-////			service.comment_update(dto);
-//		
-//		service.comment_insert(dto);
-//		HashMap<String, String>map = new HashMap<String, String>();
-//		map.put("result", "success");
-//		return map; 
-//	}
-//	
-//	@RequestMapping(value="/admin/receipe/comment/list")
-//	@ResponseBody
-//	List<CommentDto> comment_list(CommentDto dto)
-//	{
-//		System.out.println("board_id : " + dto.getComment_board_id());
-//		List<CommentDto> list = service.getCommentList(dto);
-//		return list; 
-//	}
-//	
-//	
-//	@RequestMapping(value="/admin/receipe/comment/getView")
-//	@ResponseBody
-//	CommentDto comment_getView(CommentDto dto)
-//	{
-//		System.out.println("id : " + dto.getComment_id());
-//		CommentDto resultDto = service.getCommentView(dto);
-//		return resultDto; 
-//	}
-//	
-//	@RequestMapping(value="/admin/receipe/comment/update")
-//	@ResponseBody
-//	HashMap<String, String> comment_update(CommentDto dto) {
-//		
-//		service.comment_update(dto);
-//		
-//		HashMap<String, String> map = new HashMap<String, String>();
-//		map.put("result", "success");
-//		
-//		return map;
-//	}
-//	
-//	@RequestMapping(value="/admin/receipe/comment/delete")
-//	@ResponseBody
-//	HashMap<String, String> comment_delete(CommentDto dto)
-//	{
-//		service.comment_delete(dto);
-//		
-//		HashMap<String, String>map = new HashMap<String, String>();
-//		map.put("result", "success");
-//		return map; 
-//	}	
-//	
+
 }

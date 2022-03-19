@@ -152,18 +152,19 @@ public class DIYBoardController {
 	}
 	
 	
-//**************
+//************** comment ************************
 	
 	@RequestMapping(value="/gallery/comment/write")
 	@ResponseBody
 	HashMap<String, String> comment_write(CommentDto dto)
 	{
+		dto.setComment_board_loc("2");
 		System.out.println("comment_id : " + dto.getComment_id());
 //		if( dto.getComment_id().equals(""))
 //			service.comment_insert(dto);
 //		else
 //			service.comment_update(dto);
-		
+	
 		service.comment_insert(dto);
 		HashMap<String, String>map = new HashMap<String, String>();
 		map.put("result", "success");

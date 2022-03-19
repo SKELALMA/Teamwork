@@ -112,9 +112,10 @@ public class AdminDIYBoardController {
 	@RequestMapping("/admin/gallery/delete")
 	String gallery_delete(AdminDIYBoardDto dto) {
 
+		
 		service.delete(dto);
 
-		return "redirect:/gallery/list";
+		return "redirect:/admin/gallery/list";
 	}
 
 	@RequestMapping(value = "/admin/gallery/modify")
@@ -124,7 +125,7 @@ public class AdminDIYBoardController {
 		AdminDIYBoardDto resultDto = service.getView(dto);
 		model.addAttribute("galleryDto", resultDto);
 
-		return "DIYBoard/gallery_write";
+		return "DIYBoard/admin/gallery_write";
 	}
 
 //	@ResponseBody // json �삎�떇 由ы꽩

@@ -1,23 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@page import="java.util.*" %>
-<%@page import="com.woori.myhome.common.*" %>
-<%@page import="com.woori.myhome.admin.DIYBoard.*" %>
- 
+	pageEncoding="UTF-8"%>
+<%@page import="java.util.*"%>
+<%@page import="com.woori.myhome.common.*"%>
+<%@page import="com.woori.myhome.admin.DIYBoard.*"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
 <body>
-<%
+	<%
 	String key = StringUtil.nullToValue(request.getParameter("key"), "1");
 	String keyword = StringUtil.nullToValue(request.getParameter("keyword"), "");
 	String pg = StringUtil.nullToValue(request.getParameter("pg"), "0");
@@ -25,90 +28,72 @@
 	List<AdminDIYBoardDto> list = (List<AdminDIYBoardDto>)request.getAttribute("galleryList");
 
 	
-%> 
+%>
 
-<%@include file="../include/nav.jsp" %>
-
-<form name="myform" method="get">
-	<input type="hidden" name="key" id="key" value="<%=key%>"/>
-	<input type="hidden" name="pg"  id="pg" value="<%=pg%>"/>
-	<input type="hidden" name="id"  id="id" value=""/>
-
-
-
-    	<div class="row">
-    	
-    		
-    		<div class="col-md-10">
-    		
-    		<div>
-
-    <div class="container" style="margin-top:80px">
-        <h2>자랑하기  </h2>
-        <p>총 <strong style="color: green">${totalCnt}</strong>개의 게시글이 있습니다.</p>
-<%-- 
-        <div class="input-group mb-3" style="margin-top:20px;">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-            	id="searchItem">
-                선택하세요
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#" onclick="changeSearch('1')">선택하세요</a></li>
-              <li><a class="dropdown-item" href="#" onclick="changeSearch('2')">제목</a></li>
-              <li><a class="dropdown-item" href="#" onclick="changeSearch('3')">내용</a></li>
-              <li><a class="dropdown-item" href="#" onclick="changeSearch('4')">제목+내용</a></li>
-            </ul>
-            <input type="text" class="form-control" placeholder="Search"
-            	name="keyword" id="keyword" value="<%=keyword%>">
-            <button class="btn btn-secondary" type="button" onclick="goSearch()">Go</button>
-          </div> 
---%>
-		
-			<div class="btn-group" role="group" aria-label="Basic outlined example" style="margin-bottom: 30px; float: right">
+	<%@include file="../include/nav.jsp"%>
+			<form name="myform" method="get">
+				<input type="hidden" name="key" id="key" value="<%=key%>"/>
+				<input type="hidden" name="pg" id="pg" value="<%=pg%>"/>
+				<input type="hidden" name="id" id="id" value=""/>
 			
-			  <button type="button" class="btn btn-outline-primary " onClick="goList()" >최신순</button>
-			  <button type="button" class="btn btn-outline-primary" onClick="goHitList()" >조회수순</button>
-			</div>
-			<br/>
-			<br/>
-			<br/>
-			
-        	<div class="row">
-        	
-             <!-- 한행시작 -->
-            <% for( AdminDIYBoardDto dto : list){ %>
-            <div class="col-sm-3">
-              <div class="thumbnail">
-                <a href="<%=request.getContextPath() %>/upload/<%=dto.getImage()%>" target="_blank">
-                  <img src="<%=request.getContextPath() %>/upload/<%=dto.getImage()%>" alt="Lights" style="width:100%">
-                  
-                  
-                  
-                  <div class="caption">
-                    <a href="#none" onclick="goView('<%=dto.getId()%>')"><p><%=dto.getTitle()%></p></a>
-                  </div>
-                </a>
-              </div>
-            </div>
-           <%} %>
-           
-             <!-- 한행종료 -->
-          </div>
-
-
+			    <div class="container" style="margin-top:30px ">
+			        <h2 style="margin-bottom:40px">자랑하기 게시판 (${totalCnt}건)</h2>   <!-- 배열은 $ (== < %=request.getAttribute("totalCnt")%>) 표현식 못씀 -->
+					
+			        <table class="table table-hover ">
+			        	<colgroup>
+			        		<col width="8%">
+			        		<col width="*">
+			        		<col width="12%">
+			        		<col width="12%">
+			        	</colgroup>
+			            <thead class="table-secondary">
+			              <tr>
+			                <th>번호</th>
+			                <th>제목</th>
+			                <th>작성자</th>
+			                <th style="text-align:center;">작성일</th>
+			                <th style="text-align:center;">삭제</th>
+			              </tr>
+			            </thead>
+			            <tbody>
+			            <%
+			            
 		
- 		  <div class="container mt-3" style="text-align:right;">
-       	  	<%=Pager.makeTag(request, 12, totalCnt)%>
-       	  </div>
-       	  
-          <div class="container mt-3" style="text-align:right;">
-            <a href="<%=request.getContextPath()%>/gallery/write" 
-               class="btn btn-secondary">글쓰기</a>
-          </div>
-          
-    </div>
+			           	for(AdminDIYBoardDto tempDto : list){
+			            %>
+			              <tr>
+			                <td><%=totalCnt - tempDto.getRnum()+1%></td>
+			                <!-- 
+			                < %
+			                String url=request.getContextPath()+"/board/view?id="+tempDto.getId();
+			                %>
+			                 -->
+			                <td><a href="#none" onclick="goView('<%=tempDto.getId() %>')"><%=tempDto.getTitle()%></a></td>
+			                <td><%=tempDto.getWriter() %></td>
+			                <td style="text-align:center;"><%=tempDto.getWdate()%></td>
+			                <td style="text-align:center;"><button type="button" onClick="adminDelete('<%=tempDto.getId() %>')">삭제하기</button></td>
+
+			              </tr>
+			            <%}%>
+			            </tbody>
+			          </table>
+			 
+			          <div class="container mt-3" style="text-align:right;">
+			          	<%=Pager.makeTag(request, 10, totalCnt) %>
+			          </div>
+			
+			          <div class="container mt-3" style="text-align:right;">
+			            <a href="<%=request.getContextPath()%>/noticeboard/write" 
+			               class="btn btn-secondary">글쓰기</a>
+			          </div>
+			          
+			    </div> <!-- container -->
+			    
+			</form>
+   		</div><!-- //#content -->
+	</div><!-- //#container -->
+</div><!-- //#wrap -->
     
-   </form>
 </body>
 </html>
 
@@ -127,6 +112,15 @@ function changeSearch(id)
 	document.getElementById("searchItem").innerHTML=texts[id]; //화면에 보이기 위해서 
 	document.getElementById("key").value=id;//컨트롤러로 넘기기 위해서
 	document.getElementById("keyword").value="";/////
+}
+
+function adminDelete(id){
+	let frm = document.myform;
+	frm.id.value=id;
+	alert(frm.id.value);
+	frm.action = "<%=request.getContextPath()%>/admin/gallery/delete";
+	frm.method="get";
+	frm.submit();
 }
 
 function goSearch(){
