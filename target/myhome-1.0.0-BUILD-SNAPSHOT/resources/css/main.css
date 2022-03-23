@@ -83,6 +83,7 @@ body{
 }
 .page-header p{
     text-align:center;
+    font-family: 'Jua', sans-serif;
 }
 
 .page-header h3 {
@@ -91,6 +92,7 @@ body{
     text-align:center;
     font-size:20px;
     font-weight:bold;
+    font-family: 'Jua', sans-serif;
 }
 
 ul.thumbnails { 
@@ -101,11 +103,13 @@ ul.thumbnails {
 .caption h4 {
     color: #444;
     text-indent: 10px;
+    font-family: 'Jua', sans-serif;
 }
 
 .caption p {  
     color: #99a997;
     padding: 0px 10px;
+    font-family: 'Jua', sans-serif;
 }
 .control-box {
     text-align: right;
@@ -125,6 +129,7 @@ ul.thumbnails {
     position: static;
     height: 30px;
     width: 15px;
+    font-family: 'Jua', sans-serif;
 }
 
 @media (max-width: 767px) {
@@ -164,4 +169,4 @@ li { list-style-type:none;}
     object-fit:cover;
     }    
 /* ---------------------- 슬라이드 글자 ---------------------------*/     
-div p { display: block; } p{ max-width: calc(100%); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+div p { display: block; } p{ max-width: calc(100%); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: 'Jua', sans-serif;}

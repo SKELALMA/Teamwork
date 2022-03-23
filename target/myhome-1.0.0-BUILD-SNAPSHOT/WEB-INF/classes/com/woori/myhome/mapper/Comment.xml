@@ -8,9 +8,9 @@
 	 
 	<insert id="Comment_insert" parameterType="CommentDto">
 		insert into comment
-		( comment_board_id, comment_board_loc, comment_userid, comment, comment_wdate)
+		( comment_board_id, comment_board_loc, comment_userid, comment, comment_wdate )
 		values
-		(#{comment_board_id}, 0,  #{comment_userid}, #{comment}, now())
+		(#{comment_board_id},#{comment_board_loc} ,  #{comment_userid}, #{comment}, now())
 	</insert>
 	
 	<select id="Comment_getList" parameterType="CommentDto"  resultType="CommentDto">
@@ -19,7 +19,7 @@
 		A.comment_userid, comment, A.comment_wdate, A.comment_id, A.comment_board_id
 	from comment A
 <!-- 	left outer join member B on A.userid=B.userid  -->
-	where comment_board_id=#{comment_board_id}
+	where comment_board_id=#{comment_board_id} and comment_board_loc=#{comment_board_loc}
 	
 	</select>
 	

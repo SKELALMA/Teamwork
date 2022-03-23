@@ -32,13 +32,30 @@
 	<input type="hidden" name="pg"  id="pg" value="<%=pg%>"/>
 	<input type="hidden" name="id"  id="id" value=""/>
 
-    <div class="container" style="margin-top:80px">
+
+     <div class="container">
+    
+    <div class="thumbnail">
+      <a href='#'></a><img src="<%=request.getContextPath()%>/resources/images/receipe.jpg/" alt="Lights" style="width:100%; height:500px; object-fit: cover;"></a>                          
+    </div>
+
         <h2>레시피 목록 (${totalCnt}건)</h2>
 
+	 <div class="btn-group">
+          <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown">종류</button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="${commonURL}/receipe/list/kfood">한식</a></li>
+            <li><a class="dropdown-item" href="${commonURL}/receipe/list/china">중식</a></li>
+            <li><a class="dropdown-item" href="${commonURL}/receipe/list/west">양식</a></li>
+            <li><a class="dropdown-item" href="${commonURL}/receipe/list/japan">일식</a></li>
+          </ul>
+        </div>
+        
+        
         <div class="input-group mb-3" style="margin-top:20px;">
             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
             	id="searchItem">
-                선택하세요
+                선택하세요 
             </button>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#" onclick="changeSearch('1')">선택하세요</a></li>
@@ -56,8 +73,9 @@
             <% for( ReceipeBoardDto dto : list){ %>
             <div class="col-sm-3">
               <div class="thumbnail">
-                <a href="../upload/<%=dto.getImage()%>" target="_blank">
-                  <img src="../upload/<%=dto.getImage()%>" alt="Lights" style="width:100%">
+             <%--    <a href="../upload/<%=dto.getImage()%>" target="_blank"> --%>
+                   <img class="btn" src="<%=request.getContextPath() %>/upload/<%=dto.getImage()%>" onclick="goView('<%=dto.getId()%>')" 
+                  alt="Lights" style="width:100%; height:150px; object-fit: cover;">
                   <div class="caption">
                     <a href="#none" onclick="goView('<%=dto.getId()%>')"><p><%=dto.getTitle()%></p></a>
                   </div>

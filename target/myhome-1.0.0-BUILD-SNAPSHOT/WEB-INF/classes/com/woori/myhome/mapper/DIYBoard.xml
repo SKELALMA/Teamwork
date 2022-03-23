@@ -92,9 +92,9 @@
 	
 	<insert id="DIY_insert" parameterType="DIYBoardDto">
 		insert into diy_board
-		( title, writer, comment, image, wdate, category)
+		( title, writer, comment, image, wdate)
 		values
-		( #{title}, #{writer}, #{comment}, #{image}, now(), #{category})
+		( #{title}, #{writer}, #{comment}, #{image}, now())
 	</insert>
 	
 	<select id="DIY_getView"  parameterType="String"  resultType="DIYBoardDto">
@@ -127,7 +127,6 @@
 			,writer = #{writer}
 			,comment = #{comment}
 			,image = #{image}
-			,category=#{category}
 	where  id=#{id}
 	</update>
 		

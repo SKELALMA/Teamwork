@@ -19,9 +19,9 @@
     NoticeBoardDto dto = (NoticeBoardDto)request.getAttribute("noticeBoardDto");
     %>
 
-	<form  name="myform" action="<%=request.getContextPath()%>/board/save" method="post">
-		<input type="hidden" name="id" value="<%=dto.getNotice_id()%>">
-	
+   <form  name="myform" action="<%=request.getContextPath()%>/board/save" method="post">
+      <input type="hidden" name="notice_id" value="<%=dto.getNotice_id()%>">
+   
     <div class="container" style="margin-top:80px">
         <h2>게시판 쓰기</h2>
 
@@ -73,36 +73,35 @@
 
 <script>
 function goWrite(){
-	
-	var frm = document.myform;
-	if( frm.title.value.trim().length<5){
-		
-		alert("제목을 5글자 이상 작성하세요");
-		frm.title.focus();
-		return false;
-	}
-	
-// 	if( frm.writer.value.trim().length==0){
-		
-// 		alert("이름을 작성하세요");
-// 		frm.writer.focus();
-// 		return false;
-// 	}
-	
-	if( frm.contents.value.trim().length<10){
-		
-		alert("내용을 10글자 이상 작성하세요");
-		frm.contents.focus();
-		return false;
-	}
-	
-	frm.action="<%=request.getContextPath()%>/noticeboard/save";
-	frm.method="post";
-	frm.submit(); //서버로 전송하기
-	
+   
+   var frm = document.myform;
+   if( frm.title.value.trim().length<5){
+      
+      alert("제목을 5글자 이상 작성하세요");
+      frm.title.focus();
+      return false;
+   }
+   
+//    if( frm.writer.value.trim().length==0){
+      
+//       alert("이름을 작성하세요");
+//       frm.writer.focus();
+//       return false;
+//    }
+   
+   if( frm.contents.value.trim().length<10){
+      
+      alert("내용을 10글자 이상 작성하세요");
+      frm.contents.focus();
+      return false;
+   }
+   
+   frm.action="<%=request.getContextPath()%>/noticeboard/save";
+   frm.method="post";
+   frm.submit(); //서버로 전송하기
+   
 }
 </script>
-
 
 
 

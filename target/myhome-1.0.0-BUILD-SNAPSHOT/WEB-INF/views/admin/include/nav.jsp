@@ -56,11 +56,6 @@ String email=StringUtil.nullToValue(session.getAttribute("email"), "");
 String phone=StringUtil.nullToValue(session.getAttribute("phone"), "");
 %>
 <meta charset="UTF-8">
-<div class="skip-navi">
-	<a href="#header">메뉴 바로가기</a>
-	<a href="#content">본문 바로가기</a>
-	<a href="#footer">푸터 바로가기</a>
-</div><!-- //.skip-navi -->
 
 <div id="wrap">
 	<div id="header">
@@ -69,15 +64,11 @@ String phone=StringUtil.nullToValue(session.getAttribute("phone"), "");
 				<h1 class="home"><a href="<%=request.getContextPath() %>/admin/main">관리자 페이지</a></h1>
 				<h2 class="local"><a href="<%=request.getContextPath() %>">유저 페이지</a></h2>
 			</div>
-<!-- 			<div class="gnb-menu"> -->
-<!-- 				<ul> -->
-<!-- 				<li class="mn"><a href="#">메뉴 1</a></li> -->
-<!-- 				<li class="mn"><a href="#">메뉴 2</a></li> -->
-<!-- 				<li class="mn"><a href="#">메뉴 3</a></li> -->
-<!-- 				<li class="mn"><a href="#">메뉴 4</a></li> -->
-<!-- 				<li class="mn"><a href="#">메뉴 5</a></li> -->
-<!-- 				</ul> -->
-<!-- 			</div> -->
+			<div class="gnb-menu">
+				<ul>
+					<li class="mn"><a href="<%=request.getContextPath() %>/admin/logout">로그아웃</a></li>				
+				</ul>
+			</div>
 		</div><!-- //.gnb-wrap -->
 	</div><!-- //#header -->
 
@@ -85,22 +76,18 @@ String phone=StringUtil.nullToValue(session.getAttribute("phone"), "");
 		<div id="aside">
 			<div class="aside-menu">
 				<ul>
-				<li class="mn"><a href="<%=request.getContextPath() %>/admin/member/list">회원관리</a></li>
-				<li class="mn"><a href="<%=request.getContextPath() %>/admin/qnaboard/list">QnABoard</a></li>
-				<li class="mn"><a href="#">메뉴</a></li>
-				<li class="mn"><a href="#">메뉴</a></li>
-				<li class="mn"><a href="#">메뉴</a></li>
-				<li class="mn"><a href="#">메뉴</a></li>
+					<li class="mn"><a href="<%=request.getContextPath() %>/admin/member/list">회원관리</a></li>
+					<li class="mn"><a href="<%=request.getContextPath() %>/admin/gallery/list">자랑게시판</a></li>
+					<li class="mn"><a href="<%=request.getContextPath() %>/admin/receipe/list">레시피게시판</a></li>
+					<li class="mn"><a href="<%=request.getContextPath() %>/admin/qnaboard/list">QnA</a></li>
+					<li class="mn"><a href="<%=request.getContextPath() %>/admin/noticeboard/list">공지사항</a></li>				
 				</ul>
 			</div>
 			
 		</div><!-- //#aside -->
 		<div id="content" class="">
 			
-		</div><!-- //#content -->
-	</div><!-- //#container -->
-
-	<div id="footer">
-		<div class="ft-copy">copyright &copy; <a href="http://asrahi.me"><em>ASRAHI</em></a>. MIT license.</div>
-	</div><!-- //#footer -->
-</div><!-- //#wrap -->
+		
+<!-- 	<div id="footer"> -->
+<!-- 		<div class="ft-copy">copyright &copy; <a href="http://asrahi.me"><em>ASRAHI</em></a>. MIT license.</div> -->
+<!-- 	</div>//#footer -->

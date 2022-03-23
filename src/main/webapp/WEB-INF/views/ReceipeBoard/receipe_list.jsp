@@ -36,7 +36,7 @@
      <div class="container">
     
     <div class="thumbnail">
-      <a href='#'></a><img src="<%=request.getContextPath()%>/resources/images/receipe.jpg/" alt="Lights" style="width:100%; height:500px; object-fit: cover;"></a>                          
+      <a href='#'></a><img src="<%=request.getContextPath()%>/resources/images/receipe.jpg/" alt="Lights" style="width:100%; height:250px; object-fit: cover;"></a>                          
     </div>
 
         <h2>레시피 목록 (${totalCnt}건)</h2>

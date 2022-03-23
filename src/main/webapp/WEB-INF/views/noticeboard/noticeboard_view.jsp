@@ -28,7 +28,7 @@
 	%>
 	
 	<form name="myform">
-		<input type="hidden" name="notice_id" id="board_id" value="<%=dto.getNotice_id()%>" >
+		<input type="hidden" name="notice_id" id="notice_id" value="<%=dto.getNotice_id()%>" >
 		<input type="hidden" name="pg"      value="<%=pg%>" >
 		<input type="hidden" name="key"     value="<%=key%>" >
 		<input type="hidden" name="keyword" value="<%=keyword%>" >
@@ -63,10 +63,10 @@
        
           <div class="container mt-3" style="text-align:right;">
             <a href="#none" onclick="goList()" class="btn btn-secondary">목록</a>
-<%--             <%if(userid.equals(dto.getWriter())) {%> --%>
+	<%if(userid!=null && level.equals("2")){%>
             <a href="#none" onclick="goModify()" class="btn btn-secondary">수정</a>
             <a href="#none" onclick="goDelete()" class="btn btn-secondary">삭제</a>
-<%--             <%} %>     --%>
+             <%} %>   
           </div>
           
           <table class="table" style="margin-top:20px" id="tbl_comment">

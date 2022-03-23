@@ -27,8 +27,8 @@
 		USER_ID,
 		USER_PHONE,
 		USER_ADDRESS1,
-		USER_ADDRESS2,
-		USER_ACTIVE
+		USER_ADDRESS2
+
 	)
 	VALUES
 	(
@@ -39,8 +39,7 @@
 		#{user_id},
 		#{user_phone},
 		#{user_address1},
-		#{user_address2},
-		#{user_active}
+		#{user_address2}
 	)
 	</insert>
 	

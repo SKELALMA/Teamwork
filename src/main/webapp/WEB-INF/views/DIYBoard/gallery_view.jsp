@@ -243,11 +243,11 @@ function goCommentModify(comment_id){
 
 	var userid='<%=userid%>';
 $("#comment_id").val(comment_id);
-//	if(userid==""){
+	if(userid==""){
 	
-//		alert("로그인하세요");
-//		location.href="${commonURL}/member/login";
-//	}
+		alert("로그인하세요");
+		location.href="${commonURL}/member/login";
+	}
 
 $.ajax({
 	url:"${commonURL}/gallery/comment/getView?comment_id="+comment_id,
@@ -269,11 +269,11 @@ function goCommentDelete(comment_id){
 	var userid='<%=userid%>';
 	
 $("#comment_id").val(comment_id);
-//	if(userid==""){
+	if(userid==""){
 	
-//		alert("로그인하세요");
-//		location.href="${commonURL}/member/login";
-//	}
+		alert("로그인하세요");
+		location.href="${commonURL}/member/login";
+	}
 
 if( !confirm("삭제하시겠습니까?"))
 	return false;

@@ -42,7 +42,7 @@ public class ReceipeBoardController {
 		return "ReceipeBoard/receipe_list";
 	}
 	
-	//한식 레시피 가져오기
+	//�븳�떇 �젅�떆�뵾 媛��졇�삤湲�
 	@RequestMapping("/receipe/list/kfood")
 	String receipe_kfood_list(Model model, ReceipeBoardDto dto) {
 		System.out.println("[controller] receipe_list");
@@ -62,7 +62,7 @@ public class ReceipeBoardController {
 		return "ReceipeBoard/receipe_list";
 	}
 	
-	//중식 레시피 가져오기
+	//以묒떇 �젅�떆�뵾 媛��졇�삤湲�
 	@RequestMapping("/receipe/list/china")
 	String receipe_Cfood_list(Model model, ReceipeBoardDto dto) {
 		System.out.println("[controller] receipe_list");
@@ -81,7 +81,7 @@ public class ReceipeBoardController {
 
 		return "ReceipeBoard/receipe_list";
 	}
-	//일식 레시피 가져오기
+	//�씪�떇 �젅�떆�뵾 媛��졇�삤湲�
 	@RequestMapping("/receipe/list/japan")
 	String receipe_Jfood_list(Model model, ReceipeBoardDto dto) {
 		System.out.println("[controller] receipe_list");
@@ -100,7 +100,7 @@ public class ReceipeBoardController {
 
 		return "ReceipeBoard/receipe_list";
 	}
-	//양식 레시피 가져오기
+	//�뼇�떇 �젅�떆�뵾 媛��졇�삤湲�
 	@RequestMapping("/receipe/list/west")
 	String receipe_Wfood_list(Model model, ReceipeBoardDto dto) {
 		System.out.println("[controller] receipe_list");
@@ -151,7 +151,6 @@ public class ReceipeBoardController {
 		
 		if (!upload.isBlank()) {
 			dto.setImage(upload);
-			System.out.println("占쎈솁占쎌뵬占쎌뵠�뵳占� : " + upload);
 		} else
 			dto.setImage("default.jpg");
 
@@ -194,19 +193,19 @@ public class ReceipeBoardController {
 	}
 	
 
-	@ResponseBody // json 占쎌굨占쎈뻼 �뵳�뗪쉘
+	@ResponseBody // json �뜝�럩援ⓨ뜝�럥六� 占쎈뎨占쎈뿪�돇
 	@RequestMapping(value = "/ck/fileupload3", method = { RequestMethod.POST, RequestMethod.GET })
 	public String fileUpload(ReceipeBoardDto dto, HttpServletRequest req, MultipartHttpServletRequest multi) {
 
 		List<MultipartFile> multiList = new ArrayList<MultipartFile>();
 		multiList.add(multi.getFile("upload"));
-		System.out.println("-------------------->ck占쎈퓠占쎈탵占쎄숲: " + multi.getFile("upload").getOriginalFilename());
+		System.out.println("-------------------->ck�뜝�럥�뱺�뜝�럥�꺏�뜝�럡�댉: " + multi.getFile("upload").getOriginalFilename());
 		List<String> fileNameList = new ArrayList<String>();
 
 		String path = req.getServletContext().getRealPath("/");
-		System.out.println("�눧�눖�봺占쎌읅占쎌맄燁살꼵而� : " + path);
+		System.out.println("占쎈닱占쎈닑占쎈뉴�뜝�럩�쓤�뜝�럩留꾤뇖�궡瑗듣�뚳옙 : " + path);
 
-		// 占쎈뼄占쎌젫 占쎈솁占쎌뵬占쎌뵠 占쎈씜嚥≪뮆諭� 占쎈┷占쎈뮉 �겫占썽겫占�   //url 占쎌뵠 �겫占썽겫占� 
+		// �뜝�럥堉꾢뜝�럩�젷 �뜝�럥�냱�뜝�럩逾у뜝�럩逾� �뜝�럥�뵜�슖�돦裕녻キ占� �뜝�럥�뵹�뜝�럥裕� 占쎄껀�뜝�띂寃ュ뜝占�   //url �뜝�럩逾� 占쎄껀�뜝�띂寃ュ뜝占� 
 		FileUploadUtil.upload(path, multiList, fileNameList);
 		
 		System.out.println("{ \"uploaded\" : true, \"url\" : \"http://localhost:8080/myhome/upload/"
@@ -225,12 +224,12 @@ public class ReceipeBoardController {
 	{
 		dto.setComment_board_loc("1");
 		System.out.println("comment_id : " + dto.getComment_id());
-//		if( dto.getComment_id().equals(""))
-//			service.comment_insert(dto);
-//		else
-//			service.comment_update(dto);
+		if( dto.getComment_id().equals(""))
+			service.comment_insert(dto);
+		else
+			service.comment_update(dto);
 		
-		service.comment_insert(dto);
+		//service.comment_insert(dto);
 		HashMap<String, String>map = new HashMap<String, String>();
 		map.put("result", "success");
 		return map; 

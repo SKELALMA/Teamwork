@@ -72,12 +72,13 @@
        
           <div class="container mt-3" style="text-align:right;">
             <a href="#none" onclick="goList()" class="btn btn-secondary">목록</a>
+            	<%if(userid!=null && level.equals("2")){%>
             <a href="#none" onclick="goReply()" class="btn btn-secondary">답글달기</a>
-            
-<%--             <%if(userid.equals(dto.getQna_writer())) {%> --%>
+                     <%} %>   
+             <%if(userid.equals(dto.getQna_writer())) {%>
             <a href="#none" onclick="goModify()" class="btn btn-secondary">수정</a>
             <a href="#none" onclick="goDelete()" class="btn btn-secondary">삭제</a>
-<%--             <%} %>     --%>
+            <%} %>    
           </div>
           
           <table class="table" style="margin-top:20px" id="tbl_comment">
@@ -178,13 +179,13 @@ function goInit(){
 				data += "<td>"+item.comment+"</td>";
 				data += "<td>"+item.comment_userid+"</td>";
 				data += "<td>"+item.comment_wdate+"</td>";
-// 				if(userid==item.userid)
+				if(userid==item.comment_userid)
 					data += "<td>"+item.username
 						 +"&nbsp<button type='button' onclick=goCommentModify('"+item.comment_id+"')>수정</button>"
 						 +"&nbsp<button type='button' onclick=goCommentDelete('"+item.comment_id+"')>삭제</button>"
 						 +"</td>";
-// 				else
-// 					data += "<td>"+item.username+"</td>";
+ 				else
+ 					data += "<td>"+item.username+"</td>";
 				data += "</tr>";
 				i++;
 			console.log(data);
@@ -199,12 +200,12 @@ function goInit(){
 
 function goCommentWrite(){
 	
-<%-- 	var userid='<%=userid%>'; --%>
-// 	if(userid==""){
+ 	var userid='<%=userid%>';
+ 	if(userid==""){
 		
-// 		alert("로그인하세요");
-// 		location.href="${commonURL}/member/login";
-// 	}
+ 		alert("로그인하세요");
+ 		location.href="${commonURL}/member/login";
+ 	}
 	var queryString = $("form[name=myform]").serialize();
 
 	$.ajax({
@@ -225,13 +226,13 @@ function goCommentWrite(){
 
 function goCommentModify(comment_id){
 	
-<%-- 	var userid='<%=userid%>'; --%>
+ 	var userid='<%=userid%>'; 
 	$("#comment_id").val(comment_id);
-// 	if(userid==""){
+ 	if(userid==""){
 		
-// 		alert("로그인하세요");
-// 		location.href="${commonURL}/member/login";
-// 	}
+ 		alert("로그인하세요");
+ 		location.href="${commonURL}/member/login";
+ 	}
 
 	$.ajax({
 		url:"${commonURL}/qnaboard/comment/getView?comment_id="+comment_id,

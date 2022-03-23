@@ -10,6 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 
+
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -36,7 +37,7 @@
 			name="keyword" value="<%=keyword%>">
 
 		<div class="container" style="margin-top: 80px">
-			<h2>게시판 상세보기</h2>
+			<h2>자랑하기 게시판</h2>
 			<table class="table table-hover " style="margin-top: 30px;">
 				<colgroup>
 					<col style="width: 15%;" />
@@ -81,14 +82,16 @@
 			</table>
 
 
-
+	
 			<div class="container mt-3" style="text-align: right;">
 				<a href="#none" onclick="goList()" class="btn btn-secondary">목록</a>
+				<%if (dto.getWriter().equals(userid) ) {%> 
 				<a href="#none" onclick="goModify()" class="btn btn-secondary">수정</a>
 				<a href="#none" onclick="goDelete()" class="btn btn-secondary">삭제</a>
+				<%} %>
 			</div>
 
-
+<!-----------------------------댓글  ---------------------------->
 			<table class="table" style="margin-top: 20px" id="tbl_comment">
 				<colgroup>
 					<col width="10%">
@@ -103,12 +106,11 @@
 				<tbody>
 
 				</tbody>
-			</table>
+			</table> 
 
-			<input type="hidden" name="userid" id="userid" value="<%=userid%>" />
-			<input type="hidden" name="comment_board_id" id="board_id"
-				value="<%=dto.getId()%>" /> <input type="hidden" name="comment_id"
-				id="comment_id" value="" />
+			<input type="hidden" name="comment_userid" id="userid" value="<%=userid%>" />
+			<input type="hidden" name="comment_board_id" id="board_id" value="<%=dto.getId()%>" /> 
+			<input type="hidden" name="comment_id" id="comment_id" value="" />
 
 			<div class="mb-3" style="margin-top: 13px;">
 				<textarea class="form-control" rows="3" id="comment" name="comment"></textarea>
@@ -130,7 +132,7 @@
 
 $(function(){
 	goInit();
-});
+}); 
 
 
 function goList()
@@ -157,19 +159,20 @@ function goDelete()
 		frm.submit();
 	}
 }
- 
+  
 function goInit(){
 	
 	var frmData = new FormData(document.myform);
 	console.log( $("#board_id").val() );
 	
 	$.ajax({
-		url:"${commonURL}/comment/list?comment_board_id="+$("#board_id").val(),
+		url:"${commonURL}/gallery/comment/list?comment_board_id="+$("#board_id").val(),
 		type:"GET",
 		dataType:"JSON"
 	})
 	.done( (result)=>{
-//		console.log( result );
+		
+	
 		//데이터가 배열형태로 전달받음
 		//forEach( (item)=>{}) 배열이 요소 하나하나마다 함수를 호출해준다
 		//각 요소를 매개변수로 전달
@@ -180,7 +183,7 @@ function goInit(){
 			console.log("*");
 		}
 		
-		console.log(result);
+		console.log(result);	//object날라옴
 		var userid='<%=userid%>';
 		
 		var i=1;
@@ -188,14 +191,15 @@ function goInit(){
 			var data = "<tr>";
 				data += "<td>"+ i +"</td>";
 				data += "<td>"+item.comment+"</td>";
-				
-// 				if(userid==item.userid)
+				data += "<td>"+item.comment_userid+"</td>";
+				data += "<td>"+item.comment_wdate+"</td>";
+ 				if(userid==item.comment_userid)
 					data += "<td>"+item.username
 						 +"&nbsp<button type='button' onclick=goCommentModify('"+item.comment_id+"')>수정</button>"
 						 +"&nbsp<button type='button' onclick=goCommentDelete('"+item.comment_id+"')>삭제</button>"
 						 +"</td>";
-// 				else
-// 					data += "<td>"+item.username+"</td>";
+ 				else
+ 					data += "<td>"+item.username+"</td>";
 				data += "</tr>";
 				i++;
 			console.log(data);
@@ -210,22 +214,23 @@ function goInit(){
 
 function goCommentWrite(){
 
-<%-- 	var userid='<%=userid%>'; --%>
-//	if(userid==""){
+	var userid='<%=userid%>';
+	console.log
+	if(userid==""){
 	
-//		alert("로그인하세요");
-//		location.href="${commonURL}/member/login";
-//	}
+		alert("로그인하세요");
+		location.href="${commonURL}/member/login";
+	}
 var queryString = $("form[name=myform]").serialize();
 
 $.ajax({
-	url:"${commonURL}/comment/write",
+	url:"${commonURL}/gallery/comment/write",
 	data:queryString,
 	type:"POST"
 })
 .done( (result)=>{
 	$("#comment").val("");
-	$("#btnCommentSave").html("답글등록");
+	$("#btnCommentSave").html("댓글등록");
 	$("#comment_id").val("");
 	goInit();
 })
@@ -236,7 +241,7 @@ $.ajax({
 
 function goCommentModify(comment_id){
 
-<%-- 	var userid='<%=userid%>'; --%>
+	var userid='<%=userid%>';
 $("#comment_id").val(comment_id);
 //	if(userid==""){
 	
@@ -245,7 +250,7 @@ $("#comment_id").val(comment_id);
 //	}
 
 $.ajax({
-	url:"${commonURL}/comment/getView?comment_id="+comment_id,
+	url:"${commonURL}/gallery/comment/getView?comment_id="+comment_id,
 	type:"GET",
 	dataType:"JSON"
 })
@@ -261,7 +266,8 @@ $.ajax({
 
 function goCommentDelete(comment_id){
 
-<%-- 	var userid='<%=userid%>'; --%>
+	var userid='<%=userid%>';
+	
 $("#comment_id").val(comment_id);
 //	if(userid==""){
 	
@@ -276,7 +282,7 @@ var queryString = $("form[name=myform]").serialize();
 console.log(queryString);
 
 $.ajax({
-	url:"${commonURL}/comment/delete",
+	url:"${commonURL}/gallery/comment/delete",
 	data:queryString,
 	type:"POST"
 })
@@ -293,12 +299,7 @@ $.ajax({
 }
 
 
-function goReply(){
 
-var frm = document.myform;
-frm.action="${commonURL}/qnaboard/reply";
-frm.submit();
-}
 
 
 </script>

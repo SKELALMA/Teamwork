@@ -64,7 +64,7 @@
                 <td>
                     <div class="mb-3" style="margin-top:13px;">
                         <input type="hidden" id="userid" name="userid" value="manager">
-                        <input type="text" class="form-control" id="username" name="qna_writer" placeholder="이름을 입력하세요" value="<%=dto.getQna_writer()%>">
+                        <input type="text" class="form-control" id="username" name="qna_writer" placeholder="" value="<%=userid%>" readonly>
                     </div>
                 </td>
               </tr>      

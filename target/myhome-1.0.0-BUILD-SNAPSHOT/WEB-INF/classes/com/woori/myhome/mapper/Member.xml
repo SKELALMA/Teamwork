@@ -93,7 +93,6 @@
 						,USER_PHONE=#{user_phone}
 						,USER_ADDRESS1=#{user_address1}
 						,USER_ADDRESS2 = #{user_address2}
-						,USER_ACTIVE = #{user_active}
 		where USER_ID=#{user_id}
 	</update>
 

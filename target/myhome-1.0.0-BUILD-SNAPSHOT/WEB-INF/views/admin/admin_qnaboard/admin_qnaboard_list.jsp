@@ -35,26 +35,13 @@
     
     	<div class="row">
     	
-    		<div class="col-md-2"></div>
+    		
     		<div class="col-md-10">
     		
     		<div>
     
-	        <h2>QnA (${totalCnt}건)</h2>   <!-- 배열은 $ (== < %=request.getAttribute("totalCnt")%>) 표현식 못씀 -->
+	        <h2 style="margin-bottom:40px">QnA (${totalCnt}건)</h2>   <!-- 배열은 $ (== < %=request.getAttribute("totalCnt")%>) 표현식 못씀 -->
 	
-	        <div class="input-group mb-3" style="margin-top:20px;">
-	            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" id="searchItem">
-	                선택하세요
-	            </button>
-	            <ul class="dropdown-menu">
-	              <li><a class="dropdown-item" href="#" onclick="changeSearch('1')">선택하세요</a></li>
-	              <li><a class="dropdown-item" href="#" onclick="changeSearch('2')">제목</a></li>
-	              <li><a class="dropdown-item" href="#" onclick="changeSearch('3')">내용</a></li>
-	              <li><a class="dropdown-item" href="#" onclick="changeSearch('4')">제목+내용</a></li>
-	            </ul>
-	            <input type="text" class="form-control" placeholder="Search" name="keyword" id="keyword" value="<%=keyword%>"> <!-- id는 식별용 name은 서버로 보내는용 -->
-	            <button class="btn btn-secondary" type="button" onclick="goSearch()">Go</button>
-	          </div>
 	
 	        <table class="table table-hover ">
 	        	<colgroup>
@@ -71,6 +58,7 @@
 	                <th>작성자</th>
 	                <th>작성일</th>
 	                <th style="text-align:center;">조회수</th>
+	                <th style="text-align:center">삭제</th>
 	              </tr>
 	            </thead>
 	            <tbody>
@@ -78,6 +66,8 @@
 	            
 	            List<AdminQnABoardDto> list = (List<AdminQnABoardDto>)request.getAttribute("qnaBoardList");
 	           	for(AdminQnABoardDto tempDto : list){
+	           		
+	           		//String qna_id=tempDto.getQna_id();
 	           		String reply="";
 	           		for(int i=0; i<tempDto.getQna_depth(); i++)
 	           			reply += "&nbsp;&nbsp;&nbsp;";
@@ -90,6 +80,7 @@
 	                <td><%=tempDto.getQna_writer()%></td>
 	                <td><%=tempDto.getQna_wdate()%></td>
 	                <td style="text-align:center;"><%=tempDto.getQna_hit()%></td>
+	                <td style="text-align:center;"><button type="button" onClick="adminDelete('<%=tempDto.getQna_id() %>')">삭제하기</button></td>
 	              </tr>
 	            <%}%>
 	            </tbody>
@@ -136,6 +127,19 @@ function changeSearch(id){
 	document.getElementById("searchItem").innerHTML=texts[id]; //화면에 보이기 위해서
 	document.getElementById("key").value=id; //컨트롤러로 넘기기 위해서
 	document.getElementById("keyword").value="";
+}
+
+function adminDelete(id){
+	
+	
+	let frm = document.myform;
+	frm.qna_id.value=id;
+	alert(frm.qna_id.value);
+	frm.action = "<%=request.getContextPath()%>/admin/qnaboard/delete";
+	frm.method="get";
+	frm.submit();
+
+	<%-- location.href="<%=request.getContextPath()%>/admin/qnaboard/delete"; --%>
 }
 
 function goSearch(){

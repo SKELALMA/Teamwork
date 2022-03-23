@@ -65,7 +65,7 @@
 <div class="col-xs-12">
 
 <input type="hidden" name="id"  id="id" value=""/>
-<input type="hidden" name="notice_id"  id="id" value=""/>
+<input type="hidden" name="notice_id"  id="notice_id" value=""/>
     <div class="carousel slide" id="myRecipe">
         <div class="carousel-inner">
             <div class="item active">
@@ -204,40 +204,7 @@
 
 
 <!------------------------------------ 공지사항  ---------------------------------------->
-<%-- <div class="container marketing">
-    <div class="page-header">
-        <h3>공지사항</h3>
-        <p>냉장고가 말합니다!</p>
-    </div>
-         <table class="table table-hover ">
-           <colgroup>
-              <col width="8%">
-              <col width="*">
-              <col width="12%">
-              <col width="12%">
-           </colgroup>
-            <thead class="table-success">
-              <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>작성일</th>
-              </tr>
-            </thead>
-<!--       <tbody> -->
-<!--               <tr> -->
-<!--                 <td></td> -->
-                <td><a href="#none" onclick="goView('<%=nlist.get(i).getNotice_id()%>')"><%=nlist.get(i).getNotice_title()%></a></td>
-<!--                 <td>관리자</td> -->
-                <td><%=nlist.get(i).getNotice_wdate()%></td>
-<!--               </tr> -->
-<!--        </tbody> -->
-            </table>
 
-</div>
-
- --%>
- 
 
 <div class="container marketing">
     <div class="page-header">
@@ -260,7 +227,7 @@
        <tbody>
        
         
-           
+                   <%if(nlist.size()>=4) {%>
         <%  for( int i=0; i<4; i++){ %>         
 			                          
                  <td><a href="#" onclick="goNoticeView('<%=nlist.get(i).getNotice_id() %>')">
@@ -270,7 +237,7 @@
                </tr> 
                
                <%} %>
-           
+             <%} %>
            
         </tbody>
             </table>
@@ -330,7 +297,6 @@ function goNoticeView(id){
     
     frm = document.myform;
     frm.notice_id.value=id;
-    alert(frm.notice_id.value);
     frm.method="get";
     frm.action="${pageContext.request.contextPath}/noticeboard/view";
     frm.submit();

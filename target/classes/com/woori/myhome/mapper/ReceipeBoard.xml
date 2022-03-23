@@ -178,6 +178,7 @@
 			,writer = #{writer}
 			,comment = #{comment}
 			,image = #{image}
+			,category = #{category}
 	where  id=#{id}
 	</update>
 		

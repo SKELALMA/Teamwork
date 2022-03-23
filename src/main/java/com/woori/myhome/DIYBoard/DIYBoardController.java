@@ -88,7 +88,7 @@ public class DIYBoardController {
 		
 		if (!upload.isBlank()) {
 			dto.setImage(upload);
-			System.out.println("�뙆�씪�씠由� : " + upload);
+			System.out.println("占쎈솁占쎌뵬占쎌뵠�뵳占� : " + upload);
 		} else
 			dto.setImage("default.jpg");
 
@@ -129,19 +129,19 @@ public class DIYBoardController {
 		return "DIYBoard/gallery_write";
 	}
 
-	@ResponseBody // json �삎�떇 由ы꽩
+	@ResponseBody // json 占쎌굨占쎈뻼 �뵳�뗪쉘
 	@RequestMapping(value = "/ck/fileupload2", method = { RequestMethod.POST, RequestMethod.GET })
 	public String fileUpload(DIYBoardDto dto, HttpServletRequest req, MultipartHttpServletRequest multi) {
 
 		List<MultipartFile> multiList = new ArrayList<MultipartFile>();
 		multiList.add(multi.getFile("upload"));
-		System.out.println("-------------------->ck�뿉�뵒�꽣: " + multi.getFile("upload").getOriginalFilename());
+		System.out.println("-------------------->ck占쎈퓠占쎈탵占쎄숲: " + multi.getFile("upload").getOriginalFilename());
 		List<String> fileNameList = new ArrayList<String>();
 
 		String path = req.getServletContext().getRealPath("/");
-		System.out.println("臾쇰━�쟻�쐞移섍컪 : " + path);
+		System.out.println("�눧�눖�봺占쎌읅占쎌맄燁살꼵而� : " + path);
 
-		// �떎�젣 �뙆�씪�씠 �뾽濡쒕뱶 �릺�뒗 遺�遺�   //url �씠 遺�遺� 
+		// 占쎈뼄占쎌젫 占쎈솁占쎌뵬占쎌뵠 占쎈씜嚥≪뮆諭� 占쎈┷占쎈뮉 �겫占썽겫占�   //url 占쎌뵠 �겫占썽겫占� 
 		FileUploadUtil.upload(path, multiList, fileNameList);
 		
 		System.out.println("{ \"uploaded\" : true, \"url\" : \"http://localhost:8080/myhome/upload/"
@@ -160,12 +160,12 @@ public class DIYBoardController {
 	{
 		dto.setComment_board_loc("2");
 		System.out.println("comment_id : " + dto.getComment_id());
-//		if( dto.getComment_id().equals(""))
-//			service.comment_insert(dto);
-//		else
-//			service.comment_update(dto);
+		if( dto.getComment_id().equals(""))
+			service.comment_insert(dto);
+		else
+			service.comment_update(dto);
 	
-		service.comment_insert(dto);
+//		service.comment_insert(dto);
 		HashMap<String, String>map = new HashMap<String, String>();
 		map.put("result", "success");
 		return map; 

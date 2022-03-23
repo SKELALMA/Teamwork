@@ -190,13 +190,13 @@ function goInit(){
 				data += "<td>"+ i +"</td>";
 				data += "<td>"+item.comment+"</td>";
 				
-// 				if(userid==item.userid)
+ 				if(userid==item.userid)
 					data += "<td>"+item.username
 						 +"&nbsp<button type='button' onclick=goCommentModify('"+item.comment_id+"')>수정</button>"
 						 +"&nbsp<button type='button' onclick=goCommentDelete('"+item.comment_id+"')>삭제</button>"
 						 +"</td>";
-// 				else
-// 					data += "<td>"+item.username+"</td>";
+ 				else
+ 					data += "<td>"+item.username+"</td>";
 				data += "</tr>";
 				i++;
 			console.log(data);
@@ -237,13 +237,13 @@ $.ajax({
 
 function goCommentModify(comment_id){
 
-<%-- 	var userid='<%=userid%>'; --%>
+ 	var userid='<%=userid%>'; 
 $("#comment_id").val(comment_id);
-//	if(userid==""){
+	if(userid==""){
 	
-//		alert("로그인하세요");
-//		location.href="${commonURL}/member/login";
-//	}
+		alert("로그인하세요");
+		location.href="${commonURL}/member/login";
+	}
 
 $.ajax({
 	url:"${commonURL}/receipe/comment/getView?comment_id="+comment_id,
@@ -262,13 +262,13 @@ $.ajax({
 
 function goCommentDelete(comment_id){
 
-<%-- 	var userid='<%=userid%>'; --%>
+ 	var userid='<%=userid%>'; 
 $("#comment_id").val(comment_id);
-//	if(userid==""){
+	if(userid==""){
 	
-//		alert("로그인하세요");
-//		location.href="${commonURL}/member/login";
-//	}
+		alert("로그인하세요");
+		location.href="${commonURL}/member/login";
+	}
 
 if( !confirm("삭제하시겠습니까?"))
 	return false;

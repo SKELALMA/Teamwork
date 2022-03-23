@@ -35,7 +35,7 @@
 
     <div class="container" >
     	<div class="thumbnail">
-	      <a href='#'></a><img src="<%=request.getContextPath()%>/resources/images/qna.png/" alt="Lights" style="width:100%; height:500px; object-fit: cover;"></a>                          
+	      <a href='#'></a><img src="<%=request.getContextPath()%>/resources/images/qna.png/" alt="Lights" style="width:100%; height:250px; object-fit: cover;"></a>                          
 	    </div>
         <h2 style="margin-top:50px">QnA (${totalCnt}건)</h2>   <!-- 배열은 $ (== < %=request.getAttribute("totalCnt")%>) 표현식 못씀 -->
 

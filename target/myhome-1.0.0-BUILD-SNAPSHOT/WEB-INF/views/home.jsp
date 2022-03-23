@@ -8,7 +8,10 @@
 <%@page import="com.woori.myhome.ReceipeBoard.*"%>
 
 <%
-	DIYBoardDto dto = (DIYBoardDto) request.getAttribute("galleryDto");
+   DIYBoardDto dto = (DIYBoardDto) request.getAttribute("galleryDto");
+   List<DIYBoardDto> list = (List<DIYBoardDto>)request.getAttribute("galleryList");
+   List<ReceipeBoardDto> relist = (List<ReceipeBoardDto>)request.getAttribute("receipeList");
+   List<NoticeBoardDto> nlist = (List<NoticeBoardDto>)request.getAttribute("noticeboard_list");
 %>
 
 
@@ -20,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>냉장고를 부탁해</title>
 
-	<!-- 주변마트찾기 -->
+   <!-- 주변마트찾기 -->
     <link rel="stylesheet" href="./resources/css/map.css">
     <script defer src="./resources/js/map.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2f32e646717ff8293f5afb8e4b1e42e3&libraries=services,clusterer,drawing"></script>
@@ -38,11 +41,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+   <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<link rel="stylesheet" href="./resources/css/main.css">
+   <!-- css링크 -->
+   <link rel="stylesheet" href="./resources/css/main.css">
 
 </head>
 <body>
@@ -56,124 +60,63 @@
         <h3>레시피</h3>
         <p>자기만의 독창적인 레시피를 공유하세요</p>
     </div>
+    <form name="myform" method="get">
 <div class="container">
 <div class="col-xs-12">
+
+<input type="hidden" name="id"  id="id" value=""/>
+<input type="hidden" name="notice_id"  id="id" value=""/>
     <div class="carousel slide" id="myRecipe">
         <div class="carousel-inner">
             <div class="item active">
                     <ul class="thumbnails">
+                      <%if(relist.size()>=4) {%> 
+                    <% for( int i=0;i<4;i++){ %>
                         <li class="col-sm-3">
-    						<div class="casing">
-								<div class="thumbnail">
-									<a href="#"><img src="./resources/images/diyramen.jpg" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>한뚝배기 하실래요?</h4>
-									<p>고수를 듬쁙넣어서 입안이 상쾌해지는 맛</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
+                      <div class="casing">
+                        <div class="thumbnail">
+                           <a href='#' onclick="goReCeipeView('<%=relist.get(i).getId()%>')"><img src="<%=request.getContextPath() %>/upload/<%=relist.get(i).getImage()%>" alt="Lights" style="width:100%; height:150px; object-fit: cover;"></a>
+                        </div>
+                        <div class="caption">
+                           <a href="#none"><p><%=relist.get(i).getTitle()%></p></a>
+                           <a class="btn btn-mini" href="#none" onclick="goReCeipeView('<%=relist.get(i).getId()%>')">» Read More</a>
+                        </div>
                             </div>
                         </li>
-						<li class="col-sm-3">
-							<div class="casing">
-								<div class="thumbnail">
-									<a href="#"><img src="./resources/images/steak.jpg" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>스테이크다!</h4>
-									<p>고기다!고기!</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                        <li class="col-sm-3">
-							<div class="casing">
-								<div class="thumbnail">
-									<a href="#"><img src="./resources/images/sandwich.png" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>바삭 샌드위치!</h4>
-									<p>집안에서 굴러다니는 재료로 만들어서 맛이 기가막힘! 직접들 해보셔봐요!</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                        <li class="col-sm-3">
-							<div class="casing">
-								<div class="thumbnail">
-									<a href="#"><img src="./resources/images/hotdog.jpg" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>찐! 핫도그</h4>
-									<p>미국식 찐! 오리지널 핫도그! 맛도 본고장 그대로!</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
+                        <%} %>    
+                          <%} %>                      
                     </ul>
               </div><!-- /Slide1 --> 
-            <div class="item">
+               <div class="item">
                     <ul class="thumbnails">
+                    <%if(relist.size()>=8) {%>  
+                     <% for( int i=4;i<8;i++){ %>
                         <li class="col-sm-3">
-							<div class="casing">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Item Title</h4>
-									<p>Hello world, something nice to develop</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
+                      <div class="casing">
+                        <div class="thumbnail">
+                           <a href="#none" onclick="goReCeipeView('<%=relist.get(i).getId()%>')"><img src="<%=request.getContextPath() %>/upload/<%=relist.get(i).getImage()%>" alt="Lights" style="width:100%; height:150px; object-fit: cover;"></a>
+                            <%-- <a href="<%=request.getContextPath() %>/upload/<%=dto.getImage()%>" target="_blank"> --%>
+                        </div>
+                        <div class="caption">
+                            <a href="#none"><p><%=relist.get(i).getTitle()%></p></a>
+                          <a class="btn btn-mini" href="#none" onclick="goReCeipeView('<%=relist.get(i).getId()%>')">» Read More</a>
+                        </div>
                             </div>
                         </li>
-                        <li class="col-sm-3">
-							<div class="casing">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Item Title</h4>
-									<p>Hello world, something nice to develop</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                        <li class="col-sm-3">
-							<div class="casing">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Item Title</h4>
-									<p>Hello world, something nice to develop</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                        <li class="col-sm-3">
-							<div class="casing">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Item Title</h4>
-									<p>Hello world, something nice to develop</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
+                            <%} %>
+                           <%} %>
                     </ul>
-              </div><!-- /Slide2 --> 
+              </div> <!-- /Slide2 --> 
+
         </div>
-        
-       
-	   <nav>
-			<ul class="control-box pager">
-				<li class="left"><a data-slide="prev" href="#myRecipe" class="arrowStil"><i class="glyphicon glyphicon-chevron-left"></i></a></li>
-				<li class="right"><a data-slide="next" href="#myRecipe" class="arrowStil"><i class="glyphicon glyphicon-chevron-right"></i></li>
-			</ul>
-		</nav>
-	   <!-- /.control-box -->   
+               
+      <nav>
+         <ul class="control-box pager">
+            <li class="left"><a data-slide="prev" href="#myRecipe" class="arrowStil"><i class="glyphicon glyphicon-chevron-left"></i></a></li>
+            <li class="right"><a data-slide="next" href="#myRecipe" class="arrowStil"><i class="glyphicon glyphicon-chevron-right"></i></li>
+         </ul>
+      </nav>
+      <!-- /.control-box -->   
                               
     </div><!-- /#myRecipe -->
         
@@ -182,8 +125,7 @@
 </div><!-- /.container -->
 </div>
 </a>
-<!-- ---------------------------자랑게시판------------------------------------- -->
-
+<!------------------------------------ 자랑하기  ---------------------------------------->
 <div class="container marketing">
     <div class="page-header">
         <h3>자랑게시판</h3>
@@ -191,122 +133,58 @@
     </div>
 <div class="container">
 <div class="col-xs-12">
-    <div class="carousel slide" id="myRecipe">
+    <div class="carousel slide" id="myDIY">
         <div class="carousel-inner">
             <div class="item active">
                     <ul class="thumbnails">
+                     <%if(list.size()>=4) {%>  
+                     <% for( int i=0;i<4;i++){ %>
                         <li class="col-sm-3">
-    						<div class="casing">
-								<div class="thumbnail">
-									<a href="#"><img src="./resources/images/diyramen.jpg" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>한뚝배기 하실래요?</h4>
-									<p>고수를 듬쁙넣어서 입안이 상쾌해지는 맛</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
+                      <div class="casing">
+                        <div class="thumbnail">
+                           <a href='#' onclick="goDIYView('<%=list.get(i).getId()%>')"><img src="<%=request.getContextPath() %>/upload/<%=list.get(i).getImage()%>" alt="Lights" style="width:100%; height:150px; object-fit: cover;"></a>
+                            <%-- <a href="<%=request.getContextPath() %>/upload/<%=dto.getImage()%>" target="_blank"> --%>
+                        </div>
+                        <div class="caption">
+                            <a href="#none"><p><%=list.get(i).getTitle()%></p></a>
+                           <a class="btn btn-mini" href="#" onclick="goDIYView('<%=list.get(i).getId()%>')">» Read More</a>
+                        </div>
                             </div>
                         </li>
-						<li class="col-sm-3">
-							<div class="casing">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Item Title</h4>
-									<p>Hello world, something nice to develop</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                        <li class="col-sm-3">
-							<div class="casing">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Item Title</h4>
-									<p>Hello world, something nice to develop</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                        <li class="col-sm-3">
-							<div class="casing">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Item Title</h4>
-									<p>Hello world, something nice to develop</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
+                           <%} %>
+                             <%} %>
                     </ul>
               </div><!-- /Slide1 --> 
-            <div class="item">
+             <div class="item">
                     <ul class="thumbnails">
+                    <%if(list.size()>=8) {%>  
+                     <% for( int i=4;i<8;i++){ %>
                         <li class="col-sm-3">
-							<div class="casing">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Item Title</h4>
-									<p>Hello world, something nice to develop</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
+                      <div class="casing">
+                        <div class="thumbnail">
+                            <a href='#' onclick="goDIYView('<%=list.get(i).getId()%>')"><img src="<%=request.getContextPath() %>/upload/<%=list.get(i).getImage()%>" alt="Lights" style="width:100%; height:150px; object-fit: cover;"></a>                            
+                            <%-- <a href="<%=request.getContextPath() %>/upload/<%=dto.getImage()%>" target="_blank"> --%>
+                        </div>
+                        <div class="caption">
+                            <a href="#none"><p><%=list.get(i).getTitle()%></p></a>
+                             <a class="btn btn-mini" href="#" onclick="goDIYView('<%=list.get(i).getId()%>')">» Read More</a>
+                        </div>
                             </div>
                         </li>
-                        <li class="col-sm-3">
-							<div class="casing">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Item Title</h4>
-									<p>Hello world, something nice to develop</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                        <li class="col-sm-3">
-							<div class="casing">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Item Title</h4>
-									<p>Hello world, something nice to develop</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                        <li class="col-sm-3">
-							<div class="casing">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Item Title</h4>
-									<p>Hello world, something nice to develop</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
+                            <%} %>
+                           <%} %>
                     </ul>
-              </div><!-- /Slide2 --> 
+              </div> <!-- /Slide2 --> 
         </div>
         
        
-	   <nav>
-			<ul class="control-box pager">
-				<li class="left"><a data-slide="prev" href="#myRecipe" class="arrowStil"><i class="glyphicon glyphicon-chevron-left"></i></a></li>
-				<li class="right"><a data-slide="next" href="#myRecipe" class="arrowStil"><i class="glyphicon glyphicon-chevron-right"></i></li>
-			</ul>
-		</nav>
-	   <!-- /.control-box -->   
+      <nav>
+         <ul class="control-box pager">
+            <li class="left"><a data-slide="prev" href="#myDIY" class="arrowStil"><i class="glyphicon glyphicon-chevron-left"></i></a></li>
+            <li class="right"><a data-slide="next" href="#myDIY" class="arrowStil"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+         </ul>
+      </nav>
+      <!-- /.control-box -->   
                               
     </div><!-- /#myRecipe -->
         
@@ -316,6 +194,89 @@
 </div>
 </a>
 
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+
+
+
+<!------------------------------------ 공지사항  ---------------------------------------->
+<%-- <div class="container marketing">
+    <div class="page-header">
+        <h3>공지사항</h3>
+        <p>냉장고가 말합니다!</p>
+    </div>
+         <table class="table table-hover ">
+           <colgroup>
+              <col width="8%">
+              <col width="*">
+              <col width="12%">
+              <col width="12%">
+           </colgroup>
+            <thead class="table-success">
+              <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+              </tr>
+            </thead>
+<!--       <tbody> -->
+<!--               <tr> -->
+<!--                 <td></td> -->
+                <td><a href="#none" onclick="goView('<%=nlist.get(i).getNotice_id()%>')"><%=nlist.get(i).getNotice_title()%></a></td>
+<!--                 <td>관리자</td> -->
+                <td><%=nlist.get(i).getNotice_wdate()%></td>
+<!--               </tr> -->
+<!--        </tbody> -->
+            </table>
+
+</div>
+
+ --%>
+ 
+
+<div class="container marketing">
+    <div class="page-header">
+        <h3>공지사항</h3>
+        <p>냉장고가 말합니다!</p>
+    </div>
+         <table class="table table-hover ">
+           <colgroup>
+              <col width="8%">
+              <col width="12%">
+              <col width="12%">
+           </colgroup>
+            <thead class="table-success">
+              <tr>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+              </tr>
+            </thead>
+       <tbody>
+       
+        
+           
+        <%  for( int i=0; i<4; i++){ %>         
+			                          
+                 <td><a href="#" onclick="goNoticeView('<%=nlist.get(i).getNotice_id() %>')">
+                 	<%=nlist.get(i).getNotice_title()%></a></td> 
+                 <td>관리자</td>
+                <td ><%=nlist.get(i).getNotice_wdate()%></td>
+               </tr> 
+               
+               <%} %>
+           
+           
+        </tbody>
+            </table>
+
+</div>
+</form>
 <!------------------------------------ 주변 마트 찾기 ---------------------------------------->
 <div class="container marketing">
     <div class="page-header">
@@ -342,16 +303,16 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2f32e646717ff8293f5afb8e4b1e42e3"></script>
 </div>
 
-	<hr class="featurette-divider">
-	
+   <hr class="featurette-divider">
+   
 <!---------------------------- 사이드 퀵메뉴 --------------------------------->   
-  	<div class="qnb">      
+     <div class="qnb">      
               <div class="side_menu">
                   <a href="/myhome/noticeboard/list" class="link_menu">공지사항</a>
                   <a href="/myhome/qnaboard/list" class="link_menu">QnA</a>
                   <a href="#" class="link_menu" class="float-end">TOP</a>
               </div>
-   	</div>
+      </div>
 
 </main>
 
@@ -365,24 +326,36 @@
 
 <!-- 메뉴바 상단 고정 변수-->
 <script>
-    function navigo (){
-          const header = document.getElementById("menu");
-          const headerheight = header.clientHeight;
-          document.addEventListener('scroll', onScroll, { passive: true });
-          function onScroll () {
-              const scrollposition = pageYOffset;
-              const nav = document.getElementById("menu");
-              if (headerheight<=scrollposition){
-                  nav.classList.add('fix')
-              }
-              else {
-                  nav.classList.remove('fix');
-              }
-          } 
-      }
-      navigo()
+function goNoticeView(id){
+    
+    frm = document.myform;
+    frm.notice_id.value=id;
+    alert(frm.notice_id.value);
+    frm.method="get";
+    frm.action="${pageContext.request.contextPath}/noticeboard/view";
+    frm.submit();
+ }
+      
+	 function goReCeipeView(id)
+  {
+  	frm = document.myform;
+  	frm.id.value=id;///////////
+  	frm.method="get";
+  	frm.action="${pageContext.request.contextPath}/receipe/view";
+  	frm.submit();
+  }
+
+  function goDIYView(id)
+  {
+  	frm = document.myform;
+  	frm.id.value=id;///////////
+  	frm.method="get";
+  	frm.action="${pageContext.request.contextPath}/gallery/view";
+  	frm.submit();
+  }
       
       
+    <!-- 슬라이드 변수 -->  
   $(document).ready(function() {
     $('.carousel').carousel({
       interval: 6000

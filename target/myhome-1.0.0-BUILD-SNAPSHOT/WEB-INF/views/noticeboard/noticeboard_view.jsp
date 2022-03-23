@@ -34,7 +34,7 @@
 		<input type="hidden" name="keyword" value="<%=keyword%>" >
 	
     <div class="container" style="margin-top:80px">
-        <h2>게시판 상세보기</h2>
+        <h2>공지사항 상세보기</h2>
         <table class="table table-hover " style="margin-top:30px;">
             <tbody>
               <tr class="table-secondary">
@@ -47,7 +47,7 @@
                 <th >작성일</th>
                 <td><%=dto.getNotice_wdate()%></td>
                 <th>조회수</th>
-                <td><%=dto.getNotice_hit()%></td>
+                <td><%=dto.getNotice_hit()+1%></td>
 
               </tr>
               <tr>
@@ -85,9 +85,9 @@
 		    </tbody>
 		  </table>
           
-          <input type="hidden" name="userid" id="userid" value="<%=userid%>" />
-<%--           <input type="hidden" name="notice_id" id="board_id" value="<%=dto.getNotice_id()%>" /> --%>
-          <input type="hidden" name="comment_id" id="comment_id" value="" />
+        <input type="hidden" name="comment_userid" id="userid" value="<%=userid%>" />
+		<input type="hidden" name="comment_board_id" id="board_id" value="<%=dto.getNotice_id()%>" /> 
+        <input type="hidden" name="comment_id" id="comment_id" value="" />
           
           <div class="mb-3" style="margin-top:13px;">   <!-- textarea는 태그 사이에 내용 넣어야 함 input은 value에 넣음 -->
           	<textarea class="form-control" rows="3" id="comment" name="comment"></textarea>                      
@@ -141,7 +141,7 @@ function goInit(){
 	console.log( $("#board_id").val() );
 	
 	$.ajax({
-		url:"${commonURL}/comment/list?comment_board_id="+$("#board_id").val(),
+		url:"${commonURL}/noticeboard/comment/list?comment_board_id="+$("#board_id").val(),
 		type:"GET",
 		dataType:"JSON"
 	})
@@ -165,7 +165,8 @@ function goInit(){
 			var data = "<tr>";
 				data += "<td>"+ i +"</td>";
 				data += "<td>"+item.comment+"</td>";
-				
+				data += "<td>"+item.comment_userid+"</td>";
+				data += "<td>"+item.comment_wdate+"</td>";
 // 				if(userid==item.userid)
 					data += "<td>"+item.username
 						 +"&nbsp<button type='button' onclick=goCommentModify('"+item.comment_id+"')>수정</button>"
@@ -187,22 +188,22 @@ function goInit(){
 
 function goCommentWrite(){
 	
-<%-- 	var userid='<%=userid%>'; --%>
-// 	if(userid==""){
+ 	var userid='<%=userid%>'; 
+ 	if(userid==""){
 		
-// 		alert("로그인하세요");
-// 		location.href="${commonURL}/member/login";
-// 	}
+ 		alert("로그인하세요");
+ 		location.href="${commonURL}/member/login";
+ 	}
 	var queryString = $("form[name=myform]").serialize();
 
-	$.ajax({
-		url:"${commonURL}/comment/write",
+	$.ajax({				
+		url:"${commonURL}/noticeboard/comment/write",
 		data:queryString,
 		type:"POST"
 	})
 	.done( (result)=>{
 		$("#comment").val("");
-		$("#btnCommentSave").html("답글등록");
+		$("#btnCommentSave").html("댓글등록");
 		$("#comment_id").val("");
 		goInit();
 	})
@@ -222,7 +223,7 @@ function goCommentModify(comment_id){
 // 	}
 
 	$.ajax({
-		url:"${commonURL}/comment/getView?comment_id="+comment_id,
+		url:"${commonURL}/noticeboard/comment/getView?comment_id="+comment_id,
 		type:"GET",
 		dataType:"json"
 	})
@@ -253,7 +254,7 @@ function goCommentDelete(comment_id){
 	var queryString = $("form[name=myform]").serialize();
 
 	$.ajax({
-		url:"${commonURL}/comment/delete",
+		url:"${commonURL}/noticeboard/comment/delete",
 		data:queryString,
 		contentType:false,
 		processData:false,

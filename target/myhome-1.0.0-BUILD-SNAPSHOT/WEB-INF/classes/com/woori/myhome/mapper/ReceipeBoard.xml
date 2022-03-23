@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+ 
 <mapper namespace="ReceipeBoard">
 
 	<!-- 쿼리를 xml로 작성하고 id:식별값  
@@ -53,6 +53,57 @@
 		) A
 		limit #{start}, #{pageSize}    
 	</select>
+	
+	<select id="Receipe_KFood_getList"  parameterType="ReceipeBoardDto"  resultType="ReceipeBoardDto">
+ 		
+ 		select * from 
+ 		(
+	 		select
+				A.id 
+				,A.title 
+				,A.writer 
+				,A.comment 
+				,A.image 
+				,A.wdate 
+				,A.category
+			    ,@rownum := @rownum+1 AS rnum
+				from Receipe_board A, (select @rownum:=0) B
+				
+				
+			<if test='key!=null and keyword!=null'>
+	
+				<if test='key=="1"'>
+				where title like concat('%', #{keyword} , '%') or
+				      comment like concat('%', #{keyword} , '%') or 
+				      writer like concat('%', #{keyword} , '%') 
+				</if>
+				
+				<if test='key=="2"'>
+				where title like concat('%', #{keyword} , '%')
+				</if>
+				
+				<if test='key=="3"'>
+				where comment like concat('%', #{keyword} , '%')
+				</if>
+				
+				<if test='key=="4"'>
+				where title like concat('%', #{keyword} , '%') or
+				      comment like concat('%', #{keyword} , '%') 
+				</if>
+				
+			</if> 
+			
+			order by id desc
+		) A
+		where category=#{category}
+		limit #{start}, #{pageSize} 
+		
+	</select>
+	
+	
+	
+	
+	
 	<!--  
 		paging  쿼리는  dbms마다 다르다 
 		
@@ -92,9 +143,9 @@
 	
 	<insert id="Receipe_insert" parameterType="ReceipeBoardDto">
 		insert into Receipe_board
-		( title, writer, comment, image, wdate)
+		( title, writer, comment, image, wdate, category, hit)
 		values
-		( #{title}, #{writer}, #{comment}, #{image}, now())
+		( #{title}, #{writer}, #{comment}, #{image}, now(), #{category},#{hit})
 	</insert>
 	
 	<select id="Receipe_getView"  parameterType="String"  resultType="ReceipeBoardDto">

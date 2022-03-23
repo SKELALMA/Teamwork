@@ -39,7 +39,7 @@
  
     <div class="container" >
         <div class="thumbnail">
-      	<a href='#'></a><img src="<%=request.getContextPath()%>/resources/images/diy2.jpg/" alt="Lights" style="width:100%; height:500px; object-fit: cover;"></a>                          
+      	<a href='#'></a><img src="<%=request.getContextPath()%>/resources/images/diy2.jpg/" alt="Lights" style="width:100%; height:250px; object-fit: cover;"></a>                          
     	</div>
         <h2 style="margin-top:50px">자랑하기  </h2>
         <p>총 <strong style="color: green">${totalCnt}</strong>개의 게시글이 있습니다.</p>

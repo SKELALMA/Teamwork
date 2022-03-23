@@ -56,11 +56,6 @@ public class QnABoardController {
 		System.out.println(dto.getQna_group_id());
 		System.out.println(mode);
 		
-//		if(dto.getQna_group_id()==0)
-//			service.insert(dto);
-//		else
-//			service.insert_reply(dto);
-		
 		if(mode.equals("insert")) {
 			service.insert(dto);
 			System.out.println("*************************************************************");
@@ -105,7 +100,7 @@ public class QnABoardController {
 	{
 		service.delete(dto);
 		
-		return "redirect:/qnaboard/list";  //湲��벐怨좊굹硫�
+		return "redirect:/qnaboard/list";  //疫뀐옙占쎈쾺�⑥쥓援뱄쭖占�
 	}
 	
 	@RequestMapping(value="/qnaboard/modify")
@@ -114,7 +109,7 @@ public class QnABoardController {
 		model.addAttribute("qnaboardDto", service.getView(dto) );
 		model.addAttribute("mode", "modi");
 		
-		return "qnaboard/qnaboard_write"; //write.jsp濡� �씠�룞�븳�떎
+		return "qnaboard/qnaboard_write"; //write.jsp嚥∽옙 占쎌뵠占쎈짗占쎈립占쎈뼄
 	}
 	
 	
@@ -126,12 +121,12 @@ public class QnABoardController {
 
 		dto.setComment_board_loc("3");
 		System.out.println("comment_id : " + dto.getComment_id());
-//		if( dto.getComment_id().equals(""))
-//			service.comment_insert(dto);
-//		else
-//			service.comment_update(dto);
+		if( dto.getComment_id().equals(""))
+			service.comment_insert(dto);
+		else
+			service.comment_update(dto);
 		
-		service.comment_insert(dto);
+//		service.comment_insert(dto);
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("result", "success");
 		

@@ -35,13 +35,25 @@
       <beans:property name="maxInMemorySize" value="10485760"></beans:property>
    </beans:bean>
    
-<!--    <interceptors> -->
-<!--    		<interceptor> -->
-<!--    		<mapping path="/**/*"></mapping> 모든 url -->
-<!--    			<mapping path="/**/w*"></mapping> w으로 시작하는 url -->
-<!--    			<mapping path="/**/m*"></mapping> m으로 시작하는 url -->
-<!--    			<beans:bean id="loginInterceptor" class="com.woori.myhome.common.LoginInterceptor"/> -->
-<!--    		</interceptor> -->
-<!--    </interceptors> -->
+   <interceptors>
+   		<interceptor>
+ <!--  		<mapping path="/**/*"></mapping>  --> 
+   			<mapping path="/**/w*"></mapping> <!-- w으로 시작하는 url -->
+   			<mapping path="/**/modi*"></mapping> <!-- m으로 시작하는 url -->
+   			<mapping path="/**/comm*"></mapping> <!-- m으로 시작하는 url -->
+   			<beans:bean id="loginInterceptor" class="com.woori.myhome.common.LoginInterceptor"/>
+   		</interceptor>
+   		
+   		
+   		<interceptor>
+   			<mapping path="/admin/main/**"></mapping>
+   			<mapping path="/admin/member/**"></mapping>
+   			<mapping path="/admin/gallery/**"></mapping>
+   			<mapping path="/admin/receipe/**"></mapping>
+   			<mapping path="/admin/qnaboard/**"></mapping>
+   			<mapping path="/admin/noticeboard/**"></mapping>
+   			<beans:bean id="adminLoginInterceptor" class="com.woori.myhome.admin.AdminLoginInterceptor"/>
+   		</interceptor>
+   </interceptors>
 	
 </beans:beans>

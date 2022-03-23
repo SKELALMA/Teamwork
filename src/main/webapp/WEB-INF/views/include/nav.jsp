@@ -29,7 +29,7 @@ System.out.println("level : " + level);
         <ul class="nav justify-content-end">
         <%if(userid!=null && level.equals("2")){%>
         <li class="nav-item">
-         <a class="nav-link" href="${commonURL}/member/myinfo">회원정보 관리</a>
+         <a class="nav-link" href="${commonURL}/admin/member/list">회원정보 관리</a>
         </li>
         <%}%>
         <%if(userid.equals("")) {%>

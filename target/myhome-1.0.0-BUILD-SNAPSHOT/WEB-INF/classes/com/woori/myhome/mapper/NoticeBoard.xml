@@ -145,4 +145,10 @@
 		where notice_id = #{notice_id}
 	</update>
 	
+	<update id="NoticeBoard_hit" parameterType="NoticeBoardDto">
+      update noticeboard
+         set notice_hit = notice_hit+1
+      where notice_id = #{notice_id}
+   </update>
+	
 </mapper>

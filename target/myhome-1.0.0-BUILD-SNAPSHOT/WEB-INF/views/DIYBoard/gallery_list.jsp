@@ -34,8 +34,14 @@
 	<input type="hidden" name="pg"  id="pg" value="<%=pg%>"/>
 	<input type="hidden" name="id"  id="id" value=""/>
 
-    <div class="container" style="margin-top:80px">
-        <h2>자랑하기  </h2>
+	
+
+ 
+    <div class="container" >
+        <div class="thumbnail">
+      	<a href='#'></a><img src="<%=request.getContextPath()%>/resources/images/diy2.jpg/" alt="Lights" style="width:100%; height:500px; object-fit: cover;"></a>                          
+    	</div>
+        <h2 style="margin-top:50px">자랑하기  </h2>
         <p>총 <strong style="color: green">${totalCnt}</strong>개의 게시글이 있습니다.</p>
 <%-- 
         <div class="input-group mb-3" style="margin-top:20px;">
@@ -54,7 +60,23 @@
             <button class="btn btn-secondary" type="button" onclick="goSearch()">Go</button>
           </div> 
 --%>
-		
+
+		    <div class="input-group mb-3" style="margin-top:20px; width:70%">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+            	id="searchItem">
+                선택하세요 
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" onclick="changeSearch('1')">선택하세요</a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeSearch('2')">제목</a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeSearch('3')">내용</a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeSearch('4')">제목+내용</a></li>
+            </ul>
+            <input type="text" class="form-control" placeholder="Search"
+            	name="keyword" id="keyword" value="<%=keyword%>">
+            <button class="btn btn-secondary" type="button" onclick="goSearch()">Go</button>
+          </div>
+          
 			<div class="btn-group" role="group" aria-label="Basic outlined example" style="margin-bottom: 30px; float: right">
 			
 			  <button type="button" class="btn btn-outline-primary " onClick="goList()" >최신순</button>
@@ -69,8 +91,9 @@
             <% for( DIYBoardDto dto : list){ %>
             <div class="col-sm-3">
               <div class="thumbnail">
-                <a href="<%=request.getContextPath() %>/upload/<%=dto.getImage()%>" target="_blank">
-                  <img src="<%=request.getContextPath() %>/upload/<%=dto.getImage()%>" alt="Lights" style="width:100%">
+                <%-- <a href="<%=request.getContextPath() %>/upload/<%=dto.getImage()%>" target="_blank"> --%>
+                 <img class="btn" src="<%=request.getContextPath() %>/upload/<%=dto.getImage()%>" onclick="goView('<%=dto.getId()%>')" 
+                  alt="Lights" style="width:100%; height:150px; object-fit: cover;">
                   <div class="caption">
                     <a href="#none" onclick="goView('<%=dto.getId()%>')"><p><%=dto.getTitle()%></p></a>
                   </div>

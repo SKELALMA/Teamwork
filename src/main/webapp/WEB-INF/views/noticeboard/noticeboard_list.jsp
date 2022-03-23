@@ -34,7 +34,7 @@
 
     <div class="container" >
     	<div class="thumbnail">
-	      <a href='#'></a><img src="<%=request.getContextPath()%>/resources/images/notice.jpg/" alt="Lights" style="width:100%; height:500px; object-fit: cover;"></a>                          
+	      <a href='#'></a><img src="<%=request.getContextPath()%>/resources/images/notice.jpg/" alt="Lights" style="width:100%; height:250px; object-fit: cover;"></a>                          
 	    </div>
         <h2 style="margin-top:50px">공지사항 게시판 (${totalCnt}건)</h2>   <!-- 배열은 $ (== < %=request.getAttribute("totalCnt")%>) 표현식 못씀 -->
 
@@ -109,12 +109,13 @@
           <div class="container mt-3" style="text-align:right;">
           	<%=Pager.makeTag(request, 10, totalCnt) %>
           </div>
-
+          
+	<%if(userid!=null && level.equals("2")){%>	
           <div class="container mt-3" style="text-align:right;">
             <a href="<%=request.getContextPath()%>/noticeboard/write" 
                class="btn btn-secondary">글쓰기</a>
           </div>
-          
+    <%}%>          
     </div>
     
    </form>

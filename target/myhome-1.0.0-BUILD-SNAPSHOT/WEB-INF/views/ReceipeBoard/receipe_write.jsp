@@ -32,7 +32,7 @@
 	%>
 
 	<form  name="myform" method="post" enctype="multipart/form-data">	
-		<input type="text" name="id" value="<%=dto.getId()%>" />
+		<input type="hidden" name="id" value="<%=dto.getId()%>" />
 		
     <div class="container" style="margin-top:80px">
         <h2>레시피 작성하기</h2>
@@ -57,8 +57,8 @@
                 <td>작성자</td>
                 <td>
                     <div class="mb-3" style="margin-top:13px;">
-                        <input type="text" class="form-control" id="writer" name="writer" 
-                        placeholder="이름을 입력하세요" value="<%=dto.getWriter()%>">
+                      <input type="text" class="form-control" id="writer" name="writer" 
+                        placeholder="이름을 입력하세요" value="<%=userid%>" readonly>
                     </div>
                 </td>
               </tr>      
