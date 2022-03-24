@@ -104,7 +104,7 @@ public class AdminQnABoardController {
 	@RequestMapping(value="/admin/qnaboard/delete")
 	String board_delete(AdminQnABoardDto dto)
 	{
-		System.out.println("잘들어온다 ***** ");
+
 		System.out.println("qna_id : "+dto.getQna_id());
 		service.delete(dto);
 		
@@ -121,62 +121,5 @@ public class AdminQnABoardController {
 	}
 	
 	
-//	@RequestMapping(value="/comment/write")
-//	@ResponseBody
-//	HashMap<String, String> comment_write(CommentDto dto) {
-//		
-//		System.out.println("comment_id : " + dto.getComment_id());
-////		if( dto.getComment_id().equals(""))
-////			service.comment_insert(dto);
-////		else
-////			service.comment_update(dto);
-//		
-//		service.comment_insert(dto);
-//		HashMap<String, String> map = new HashMap<String, String>();
-//		map.put("result", "success");
-//		
-//		return map;
-//	}
-//	
-//	@RequestMapping(value="/comment/list")
-//	@ResponseBody
-//	List<CommentDto> comment_list(CommentDto dto) {
-//		
-//		System.out.println("board_id : " + dto.getComment_board_id());
-//		List<CommentDto> list = service.getCommentList(dto);		
-//		return list;
-//	}
-//	
-//	@RequestMapping(value="/comment/getView")
-//	@ResponseBody
-//	CommentDto comment_getView(CommentDto dto) {
-//		
-//		System.out.println("id : " + dto.getComment_id());
-//		CommentDto resultDto = service.getCommentView(dto);		
-//		return resultDto;
-//	}
-//	
-//	@RequestMapping(value="/comment/update")
-//	@ResponseBody
-//	HashMap<String, String> comment_update(CommentDto dto) {
-//		
-//		service.comment_update(dto);
-//		
-//		HashMap<String, String> map = new HashMap<String, String>();
-//		map.put("result", "success");
-//		
-//		return map;
-//	}
-//	
-//	@RequestMapping(value="/comment/delete")
-//	@ResponseBody
-//	HashMap<String, String> comment_delete(CommentDto dto) {
-//		
-//		service.comment_delete(dto);
-//		
-//		HashMap<String, String> map = new HashMap<String, String>();
-//		map.put("result", "success");
-//		
-//		return map;
-//	}
+
 }

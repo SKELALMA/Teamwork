@@ -72,23 +72,13 @@ public class DIYBoardController {
 	}
 
 	@RequestMapping("/gallery/save")
-	String gallery_save(DIYBoardDto dto, String upload) {
-
-		//List<MultipartFile> multiList = new ArrayList<MultipartFile>();
-
-		//System.out.println("-------------------->: " + multi.getFile("upload").getOriginalFilename());
-		//multiList.add(multi.getFile("upload"));
-		//List<String> fileNameList = new ArrayList<String>();
-
-		//String path = req.getServletContext().getRealPath("/");
-		//FileUploadUtil.upload(path, multiList, fileNameList);
+	String gallery_save(DIYBoardDto dto, String upload) {	
 		
-		
-		System.out.println("--------------------"+ upload);
+	//	System.out.println("--------------------"+ upload);
 		
 		if (!upload.isBlank()) {
 			dto.setImage(upload);
-			System.out.println("占쎈솁占쎌뵬占쎌뵠�뵳占� : " + upload);
+	//		System.out.println( upload);
 		} else
 			dto.setImage("default.jpg");
 
@@ -121,7 +111,7 @@ public class DIYBoardController {
 
 	@RequestMapping(value = "/gallery/modify")
 	String gallery_modify(DIYBoardDto dto, Model model) {
-		System.out.println("-------------------modify");
+	//	System.out.println("-------------------modify");
 
 		DIYBoardDto resultDto = service.getView(dto);
 		model.addAttribute("galleryDto", resultDto);
@@ -129,19 +119,19 @@ public class DIYBoardController {
 		return "DIYBoard/gallery_write";
 	}
 
-	@ResponseBody // json 占쎌굨占쎈뻼 �뵳�뗪쉘
+	@ResponseBody 
 	@RequestMapping(value = "/ck/fileupload2", method = { RequestMethod.POST, RequestMethod.GET })
 	public String fileUpload(DIYBoardDto dto, HttpServletRequest req, MultipartHttpServletRequest multi) {
 
 		List<MultipartFile> multiList = new ArrayList<MultipartFile>();
 		multiList.add(multi.getFile("upload"));
-		System.out.println("-------------------->ck占쎈퓠占쎈탵占쎄숲: " + multi.getFile("upload").getOriginalFilename());
+	//	System.out.println( multi.getFile("upload").getOriginalFilename());
 		List<String> fileNameList = new ArrayList<String>();
 
 		String path = req.getServletContext().getRealPath("/");
-		System.out.println("�눧�눖�봺占쎌읅占쎌맄燁살꼵而� : " + path);
+	//	System.out.println(path);
 
-		// 占쎈뼄占쎌젫 占쎈솁占쎌뵬占쎌뵠 占쎈씜嚥≪뮆諭� 占쎈┷占쎈뮉 �겫占썽겫占�   //url 占쎌뵠 �겫占썽겫占� 
+		
 		FileUploadUtil.upload(path, multiList, fileNameList);
 		
 		System.out.println("{ \"uploaded\" : true, \"url\" : \"http://localhost:8080/myhome/upload/"

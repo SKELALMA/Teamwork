@@ -71,22 +71,12 @@ public class AdminDIYBoardController {
 
 	@RequestMapping("/admin/gallery/save")
 	String gallery_save(AdminDIYBoardDto dto, String upload) {
-
-		//List<MultipartFile> multiList = new ArrayList<MultipartFile>();
-
-		//System.out.println("-------------------->: " + multi.getFile("upload").getOriginalFilename());
-		//multiList.add(multi.getFile("upload"));
-		//List<String> fileNameList = new ArrayList<String>();
-
-		//String path = req.getServletContext().getRealPath("/");
-		//FileUploadUtil.upload(path, multiList, fileNameList);
-		
 		
 		System.out.println("--------------------"+ upload);
 		
 		if (!upload.isBlank()) {
 			dto.setImage(upload);
-			System.out.println("�뙆�씪�씠由� : " + upload);
+	
 		} else
 			dto.setImage("default.jpg");
 
@@ -120,7 +110,7 @@ public class AdminDIYBoardController {
 
 	@RequestMapping(value = "/admin/gallery/modify")
 	String gallery_modify(AdminDIYBoardDto dto, Model model) {
-		System.out.println("-------------------modify");
+	//	System.out.println("-------------------modify");
 
 		AdminDIYBoardDto resultDto = service.getView(dto);
 		model.addAttribute("galleryDto", resultDto);
@@ -128,88 +118,7 @@ public class AdminDIYBoardController {
 		return "DIYBoard/admin/gallery_write";
 	}
 
-//	@ResponseBody // json �삎�떇 由ы꽩
-//	@RequestMapping(value = "/ck/fileupload2", method = { RequestMethod.POST, RequestMethod.GET })
-//	public String fileUpload(AdminDIYBoardDto dto, HttpServletRequest req, MultipartHttpServletRequest multi) {
-//
-//		List<MultipartFile> multiList = new ArrayList<MultipartFile>();
-//		multiList.add(multi.getFile("upload"));
-//		System.out.println("-------------------->ck�뿉�뵒�꽣: " + multi.getFile("upload").getOriginalFilename());
-//		List<String> fileNameList = new ArrayList<String>();
-//
-//		String path = req.getServletContext().getRealPath("/");
-//		System.out.println("臾쇰━�쟻�쐞移섍컪 : " + path);
-//
-//		// �떎�젣 �뙆�씪�씠 �뾽濡쒕뱶 �릺�뒗 遺�遺�   //url �씠 遺�遺� 
-//		FileUploadUtil.upload(path, multiList, fileNameList);
-//		
-//		System.out.println("{ \"uploaded\" : true, \"url\" : \"http://localhost:8080/myhome/upload/"
-//				+ fileNameList.get(0) + "\" }");
-//		String url = "{ \"uploaded\" : true, \"url\" : \"http://localhost:8080/myhome/upload/" + fileNameList.get(0) + "\" }";
-//	
-//		return url;
-//	}
-	
-	
-//**************
-	
-//	@RequestMapping(value="/comment/write")
-//	@ResponseBody
-//	HashMap<String, String> comment_write(CommentDto dto)
-//	{
-//		System.out.println("comment_id : " + dto.getComment_id());
-////		if( dto.getComment_id().equals(""))
-////			service.comment_insert(dto);
-////		else
-////			service.comment_update(dto);
-//		
-//		service.comment_insert(dto);
-//		HashMap<String, String>map = new HashMap<String, String>();
-//		map.put("result", "success");
-//		return map; 
-//	}
-//	
-//	@RequestMapping(value="/comment/list")
-//	@ResponseBody
-//	List<CommentDto> comment_list(CommentDto dto)
-//	{
-//		System.out.println("board_id : " + dto.getComment_board_id());
-//		List<CommentDto> list = service.getCommentList(dto);
-//		return list; 
-//	}
-//	
-//	
-//	@RequestMapping(value="/comment/getView")
-//	@ResponseBody
-//	CommentDto comment_getView(CommentDto dto)
-//	{
-//		System.out.println("id : " + dto.getComment_id());
-//		CommentDto resultDto = service.getCommentView(dto);
-//		return resultDto; 
-//	}
-//	
-//	@RequestMapping(value="/comment/update")
-//	@ResponseBody
-//	HashMap<String, String> comment_update(CommentDto dto) {
-//		
-//		service.comment_update(dto);
-//		
-//		HashMap<String, String> map = new HashMap<String, String>();
-//		map.put("result", "success");
-//		
-//		return map;
-//	}
-//	
-//	@RequestMapping(value="/comment/delete")
-//	@ResponseBody
-//	HashMap<String, String> comment_delete(CommentDto dto)
-//	{
-//		service.comment_delete(dto);
-//		
-//		HashMap<String, String>map = new HashMap<String, String>();
-//		map.put("result", "success");
-//		return map; 
-//	}	
+
 	
 
 }

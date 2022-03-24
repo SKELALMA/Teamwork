@@ -100,7 +100,7 @@ public class QnABoardController {
 	{
 		service.delete(dto);
 		
-		return "redirect:/qnaboard/list";  //疫뀐옙占쎈쾺�⑥쥓援뱄쭖占�
+		return "redirect:/qnaboard/list";  
 	}
 	
 	@RequestMapping(value="/qnaboard/modify")
@@ -109,7 +109,7 @@ public class QnABoardController {
 		model.addAttribute("qnaboardDto", service.getView(dto) );
 		model.addAttribute("mode", "modi");
 		
-		return "qnaboard/qnaboard_write"; //write.jsp嚥∽옙 占쎌뵠占쎈짗占쎈립占쎈뼄
+		return "qnaboard/qnaboard_write"; 
 	}
 	
 	
